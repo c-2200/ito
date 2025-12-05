@@ -53,19 +53,19 @@
       for (let i = 1; i <= 36; i++) {
         const cell = document.createElement("div");
         cell.textContent = i;
-      if (redNumbers.includes(i)) {
-        cell.className = "cell red";
-      } else {
-        cell.className = "cell black";
-      }
-      cell.style.gridRow = row;
-      cell.style.gridColumn = col;
-      table.appendChild(cell);
-      row++;
-        if (row > 3) {
-          row = 1;
-          col++;
+        if (redNumbers.includes(i)) {
+          cell.className = "cell red";
+        } else {
+          cell.className = "cell black";
         }
+        cell.style.gridRow = row;
+        cell.style.gridColumn = col;
+        table.appendChild(cell);
+        row++;
+          if (row > 3) {
+            row = 1;
+            col++;
+          }
       }
 </script>
   </body>
