@@ -8,6 +8,7 @@
     <input type="number" id="number" placeholder="参加者人数を入力してください">
     <p id="result"></p>
     <div id="nameInput"></div>
+    <ul id="gameSelect"></ul>
     <script>
       const number = document.getElementById("number");
       number.addEventListener("keydown", function(event) {
@@ -36,6 +37,13 @@
           input.placeholder = `参加者${i}`;
           div.appendChild(input);
         }
+        const ul = document.getElementById("gameSelect");
+        const li = document.createElement("li");
+        li.textContent = "ルーレット";
+        li.addEventListener("click", () => {
+          window.location.href = "roulette.html";
+        });
+        ul.appendChild(li);
       }
     </script>
   </body>
