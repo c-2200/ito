@@ -5,16 +5,19 @@
     <title>ルーレット</title>
     <style>
       body {
-        background: #ffffff; /* ← 背景を白に変更 */
+        background: white;
         font-family: Arial, sans-serif;
+        text-align: center; /* 全体中央揃え */
+      }
+      .wrapper {
+        display: inline-block;
+        margin-top: 20px;
       }
       .table {
         display: grid;
-        grid-template-columns: 80px repeat(12, 80px); /* ← 0 ＋ 12列 */
+        grid-template-columns: 80px repeat(3, 80px);
         grid-auto-rows: 60px;
         gap: 2px;
-        width: max-content;
-        margin: 40px auto;
         background: #000;
         padding: 4px;
         border-radius: 8px;
@@ -28,36 +31,37 @@
         color: white;
         border-radius: 4px;
       }
-      .green { background: green; }
-      .red   { background: red; }
+      .green { background: #008000; }
+      .red { background: red; }
       .black { background: black; }
-      .labelRow div {
+      .bets {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+      }
+      .bet-label {
         background: #222;
         color: white;
-        padding: 15px;
-        text-align: center;
-        font-size: 20px;
+        padding: 12px 22px;
         border-radius: 6px;
-      }
-      .labelRow {
-        display: grid;
-        grid-template-columns: repeat(6, 1fr);
-        gap: 10px;
-        width: 600px;
-        margin: 20px auto;
+        font-size: 20px;
+        font-weight: bold;
       }
     </style>
   </head>
   <body>
     <h1>ルーレットページ</h1>
-    <div class="table" id="rouletteTable"></div>
-    <div class="labelRow">
-      <div>1st 12</div>
-      <div>2nd 12</div>
-      <div>3rd 12</div>
-      <div>Even</div>
-      <div>Odd</div>
-      <div>Red / Black</div>
+    <div class="wrapper">
+      <div class="table" id="rouletteTable"></div>
+      <div class="bets">
+        <div class="bet-label">1st 12</div>
+        <div class="bet-label">2nd 12</div>
+        <div class="bet-label">3rd 12</div>
+        <div class="bet-label">Even</div>
+        <div class="bet-label">Odd</div>
+        <div class="bet-label">Red / Black</div>
+      </div>
     </div>
     <script>
       const redNumbers = [
