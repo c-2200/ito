@@ -7,17 +7,15 @@
       body {
         background: white;
         font-family: Arial, sans-serif;
-        text-align: center; /* 全体中央揃え */
-      }
-      .wrapper {
-        display: inline-block;
-        margin-top: 20px;
       }
       .table {
         display: grid;
-        grid-template-columns: 80px repeat(3, 80px);
+        grid-auto-flow: column;
+        grid-auto-columns: 80px;
         grid-auto-rows: 60px;
         gap: 2px;
+        width: max-content;
+        margin: 40px auto;
         background: #000;
         padding: 4px;
         border-radius: 8px;
@@ -31,38 +29,14 @@
         color: white;
         border-radius: 4px;
       }
-      .green { background: #008000; }
+      .green { background: green; }
       .red { background: red; }
       .black { background: black; }
-      .bets {
-        margin-top: 30px;
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-      }
-      .bet-label {
-        background: #222;
-        color: white;
-        padding: 12px 22px;
-        border-radius: 6px;
-        font-size: 20px;
-        font-weight: bold;
-      }
     </style>
   </head>
   <body>
     <h1>ルーレットページ</h1>
-    <div class="wrapper">
-      <div class="table" id="rouletteTable"></div>
-      <div class="bets">
-        <div class="bet-label">1st 12</div>
-        <div class="bet-label">2nd 12</div>
-        <div class="bet-label">3rd 12</div>
-        <div class="bet-label">Even</div>
-        <div class="bet-label">Odd</div>
-        <div class="bet-label">Red / Black</div>
-      </div>
-    </div>
+    <div class="table" id="rouletteTable"></div>
     <script>
       const redNumbers = [
         1,3,5,7,9,12,14,16,18,
@@ -73,23 +47,18 @@
       zero.textContent = "0";
       zero.className = "cell green";
       zero.style.gridRow = "1 / span 3";
-      zero.style.gridColumn = "1";
       table.appendChild(zero);
       let row = 1;
-      let col = 2; // 2列目からスタート
+      let col = 2;
       for (let i = 1; i <= 36; i++) {
         const cell = document.createElement("div");
         cell.textContent = i;
-        if (redNumbers.includes(i)) {
-          cell.className = "cell red";
-        } else {
-          cell.className = "cell black";
-        }
+        cell.className = redNumbers.includes(i) ? "cell red" : "cell black";
         cell.style.gridRow = row;
         cell.style.gridColumn = col;
         table.appendChild(cell);
         row++;
-        if (row > 3) { // 3行まで行ったら次の列へ
+        if (row > 3) {
           row = 1;
           col++;
         }
