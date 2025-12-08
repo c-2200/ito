@@ -56,24 +56,23 @@
       .green { background: green; }
       .red { background: red; }
       .black { background: black; }
-      <div class="outside">
-        <div>1st 12</div>
-        <div>2nd 12</div>
-        <div>3rd 12</div>
-      
-        <div>1 - 18</div>
-        <div>EVEN</div>
-        <div class="out-red">RED</div>
-        <div class="out-black">BLACK</div>
-        <div>ODD</div>
-        <div>19 - 36</div>
-      </div>
       <!--ベッド入力-->
       .bedTable {
         display: grid;
       }
     </style>
     <div class="table" id="rouletteTable"></div>
+    <div class="outside">
+      <div>1st 12</div>
+      <div>2nd 12</div>
+      <div>3rd 12</div>     
+      <div>1 - 18</div>
+      <div>EVEN</div>
+      <div class="out-red">RED</div>
+      <div class="out-black">BLACK</div>
+      <div>ODD</div>
+      <div>19 - 36</div>
+    </div>
     <script>
       const redNumbers = [1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36];
       const table = document.getElementById("rouletteTable");
