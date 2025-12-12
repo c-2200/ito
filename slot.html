@@ -7,4 +7,34 @@
   <body>
     .slot {}
   </body>
+  <script>
+    const firstReel = {
+      1: "🍇", 2: "🍒", 3: "BAR", 4: "7", 5: "🍇", 6: "BAR", 7: "🍒", 8: "🍉",
+      9: "🍇", 10: "BAR", 11: "🍒", 12: "7", 13: "🍉", 14: "🍒", 15: "🍇"
+      }
+    const secondReel = {
+      1: "7", 2: "🍇", 3: "🍉", 4: "BAR", 5: "🍇", 6: "🍒", 7: "BAR", 8: "7",
+      9: "🍒, 10: "🍉", 11: "🍇", 12: "BAR", 13: "🍒", 14: "🍇", 15: "🍒"
+      }
+    const thirdReel = {
+      1: "BAR", 2: "🍉", 3: "7", 4: "🍒", 5: "🍇", 6: "BAR", 7: "🍇", 8: "🍉",
+      9: "BAR", 10: "🍒", 11: "🍇", 12: "7", 13: "🍇", 14: "🍒", 15: "🍒"
+    }
+    function wait123key() {
+      return new Promise((resolve) => {
+        function handler(event) {
+          if (event.key === "1" || event.key === "2" || event.key === "3") {
+            document.removeEventListener("keydown", handler);
+            resolve(event.key);
+          }
+        }
+        document.addEventListener("keydown", handler);
+      });
+    }
+    async funstion stopReel() {
+      for (const i = 1; i++) {
+        
+      }
+    }
+  </script>
 </html>
