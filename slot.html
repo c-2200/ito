@@ -52,23 +52,31 @@
       };
       let index = 0;
       let firstRunning = true;
+      let secondRunning = true;
+      let thirdRunning = true;
       const display1_1 = document.getElementById("display1_1");
+      const display1_1 = document.getElementById("display2_1");
+      const display1_1 = document.getElementById("display3_1");
       const display1_2 = document.getElementById("display1_2");
+      const display1_2 = document.getElementById("display2_2");
+      const display1_2 = document.getElementById("display3_2");
       const display1_3 = document.getElementById("display1_3");
+      const display1_3 = document.getElementById("display2_3");
+      const display1_3 = document.getElementById("display3_3");
       const firstInterval = setInterval(() => {
         if (!firstRunning) {
           clearInterval(firstInterval);
           return;
         }
-        const pos1 = firstReel[(index + 1) % 12];
-        const pos2 = firstReel[(index + 2) % 12];
-        const pos3 = firstReel[(index + 3) % 12];
+        const pos1 = firstReel[(index % 12) + 1];
+        const pos2 = firstReel[(index % 12) + 2];
+        const pos3 = firstReel[(index % 12) + 3];
         display1_1.textContent = pos1;
         display1_2.textContent = pos2;
         display1_3.textContent = pos3;
         index++;
       }, 80);
-      document.getElementById("firstRunning").onclick = () => {
+      document.getElementById("firstStop").onclick = () => {
         firstRunning = false;
       }
       const secondInterval = setInterval(() => {
@@ -76,9 +84,9 @@
           clearInterval(secondInterval);
           return;
         };
-        const pos1 = secondReel[(index + 1) % 12];
-        const pos2 = secondReel[(index + 2) % 12];
-        const pos3 = secondReel[(index + 3) % 12];
+        const pos1 = secondReel[(index % 12) + 1];
+        const pos2 = secondReel[(index % 12) + 2];
+        const pos3 = secondReel[(index % 12) + 3];
         display2_1.textContent = pos1;
         display2_2.textContent = pos2;
         display2_3.textContent = pos3;
@@ -91,9 +99,9 @@
           clearInterval(thirdInterval);
           return;
         }
-        const pos1 = thirdReel[(index + 1) % 12];
-        const pos2 = thirdReel[(index + 2) % 12];
-        const pos3 = thirdReel[(index + 3) % 12];
+        const pos1 = thirdReel[(index % 12) + 1];
+        const pos2 = thirdReel[(index % 12) + 2];
+        const pos3 = thirdReel[(index % 12) + 3];
         display3_1.textContent = pos1;
         display3_2.textContent = pos2;
         display3_3.textContent = pos3;
