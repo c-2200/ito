@@ -4,37 +4,24 @@
     <meta charset="UTF-8">
     <meta name="robots" content="noindex">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="canonical" href="3-1first.css">
     <title>スロット</title>
   </head>
   <body>
-    .slot {}
+    <div id="firstColumn"></div>
+    <button id="firstStop"></button>
+    <script>
+      const firstReel = {
+        1: "🍇", 2: "🍒", 3: "BAR", 4: "🦏", 5: "🍇", 6: "7", 7: "🦏", 8: "🤡", 9: "🍇", 10: "🔔", 11: "🦏", 12: "🍇"
+      };
+      const secondReel = {
+        1: "7", 2: "🍇", 3: "🔔", 4: "BAR", 5: "🍇", 6: "🍒", 7: "🦏", 8: "🍇", 9: "🤡", 10: "🦏", 11: "🍇", 12: "🦏"
+      };
+      const thirdReel = {
+        1: "🍒", 2: "🦏", 3: "BAR", 4: "🍇", 5: "🦏", 6: "🍇", 7: "7", 8: "🤡", 9: "🍇", 10: "🔔", 11: "🦏", 12: "🍇"
+      };
+      let index = 0;
+      let running = true;
+      const firstColumn = document.getElementById("firstColumn");
+    </script>
   </body>
-  <script>
-    const firstReel = {
-      1: "🍇", 2: "🍒", 3: "BAR", 4: "🦏", 5: "🍇", 6: "7", 7: "🦏", 8: "🤡", 9: "🍇", 10: "🔔", 11: "🦏", 12: "🍇"
-    }
-    const secondReel = {
-      1: "7", 2: "🍇", 3: "🔔", 4: "BAR", 5: "🍇", 6: "🍒", 7: "🦏", 8: "🍇", 9: "🤡", 10: "🦏", 11: "🍇", 12: "🦏"
-    }
-    const thirdReel = {
-      1: "🍒", 2: "🦏", 3: "BAR", 4: "🍇", 5: "🦏", 6: "🍇", 7: "7", 8: "🤡", 9: "🍇", 10: "🔔", 11: "🦏", 12: "🍇"
-    }
-    function wait123key() {
-      return new Promise((resolve) => {
-        function handler(event) {
-          if (event.key === "1" || event.key === "2" || event.key === "3") {
-            document.removeEventListener("keydown", handler);
-            resolve(event.key);
-          }
-        }
-        document.addEventListener("keydown", handler);
-      });
-    }
-    async funstion stopReel() {
-      for (const i = 1; i++) {
-        
-      }
-    }
-  </script>
 </html>
