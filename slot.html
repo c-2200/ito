@@ -7,7 +7,18 @@
     <title>スロット</title>
   </head>
   <body>
-    <div id="firstColumn"></div>
+    <style>
+      .slot {
+        display: grid;
+        grid-template-columns: 100px 100px 100px;
+        grid-template-rows: 50px 50px 50px;
+      }
+    </style>
+    <div class="slot">
+      <div id="display1_1"></div>
+      <div id="display1_2"></div>
+      <div id="display1_3"></div>
+    </div>
     <button id="firstStop"></button>
     <script>
       const firstReel = {
@@ -21,7 +32,17 @@
       };
       let index = 0;
       let running = true;
-      const firstColumn = document.getElementById("firstColumn");
+      const display1_1 = document.getElementById("display1_1");
+      const intervalId = setInterval(() => {
+        if (!running) {
+          clearInterval(intervalId);
+          return;
+        }
+        const 1_1 = index % 12 + 1;
+        const 1_2 = index % 12 + 2;
+        const 1_3 = index % 12 + 3;
+        
+      }
     </script>
   </body>
 </html>
