@@ -10,7 +10,7 @@
     <style>
       .slot {
         display: grid;
-        grid-template-columns: 100px 100px 100px;
+        grid-template-columns: 100px;
         grid-template-rows: 50px 50px 50px;
       }
     </style>
@@ -40,9 +40,9 @@
           clearInterval(intervalId);
           return;
         }
-        const pos1 = (index + 1) % 12;
-        const pos2 = (index + 2) % 12;
-        const pos3 = (index + 3) % 12;
+        const pos1 = firstReel[(index + 1) % 12];
+        const pos2 = firstReel[(index + 2) % 12];
+        const pos3 = firstReel[(index + 3) % 12];
         display1_1.textContent = pos1;
         display1_2.textContent = pos2;
         display1_3.textContent = pos3;
