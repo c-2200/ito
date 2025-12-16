@@ -40,12 +40,13 @@
           clearInterval(intervalId);
           return;
         }
-        const 1_1 = index % 12 + 1;
-        const 1_2 = index % 12 + 2;
-        const 1_3 = index % 12 + 3;
-        display1_1.textContent = 1_1;
-        display1_2.textContent = 1_2;
-        display1_3.textContent = 1_3;
+        const pos1 = (index + 1) % 12;
+        const pos2 = (index + 2) % 12;
+        const pos3 = (index + 3) % 12;
+        display1_1.textContent = pos1;
+        display1_2.textContent = pos2;
+        display1_3.textContent = pos3;
+        index++;
       }, 80);
       document.getElementById("firstStop").onclick = () => {
         running = false;
