@@ -114,6 +114,13 @@
       const display1_3 = document.getElementById("display1_3");
       const display2_3 = document.getElementById("display2_3");
       const display3_3 = document.getElementById("display3_3");
+      document.getElementById("spinButton").onclick = () => {
+        if (firstRunning == false && secondRunning == false &&thirdRunning == false) {
+          firstRunning = true;
+          secondRunning = true;
+          thirdRunning = true;
+        }
+      };
       const firstInterval = setInterval(() => {
         if (!firstRunning) {
           clearInterval(firstInterval);
