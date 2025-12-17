@@ -36,6 +36,12 @@
         border-radius: 10px;
         cursor: pointer;
       }
+      .stops {
+        display: grid;
+        grid-template-columns: repeat(3, 120px);
+        gap: 10px;
+        justify-content: center;
+      }
       .betButton {
         width: 100px;
         height: 60px;
@@ -85,9 +91,11 @@
         <div id="display2_3"></div>
         <div id="display3_3"></div>
       </div>
-      <button class="stopButton" id="firstStop">STOP</button>
-      <button class="stopButton" id="secondStop">STOP</button>
-      <button class="stopButton" id="thirdStop">STOP</button>
+      <div class="stops">
+        <button class="stopButton" id="firstStop">STOP</button>
+        <button class="stopButton" id="secondStop">STOP</button>
+        <button class="stopButton" id="thirdStop">STOP</button>
+      </div>
       <div class="money">
         <div>CREDIT</div>
         <div>PAYOUT</div>
