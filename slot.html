@@ -91,6 +91,8 @@
       <div class="money">
         <div>CREDIT</div>
         <div>PAYOUT</div>
+        <div id="credit"></div>
+        <div id="payout"></div>
       </div>
     </div>
     <script>
@@ -118,60 +120,66 @@
       const display1_3 = document.getElementById("display1_3");
       const display2_3 = document.getElementById("display2_3");
       const display3_3 = document.getElementById("display3_3");
+      function startFirstReel() {
+        document.getElementById("firstStop").onclick() => {
+          firstRunning = false;
+          clearInterval(firstInterval);
+        };
+        if (firstRunning) {
+          const firstInterval = setInterval(() => {
+            const pos1 = firstReel[(firstIndex % 12) + 1];
+            const pos2 = firstReel[((firstIndex + 1) % 12) + 1];
+            const pos3 = firstReel[((firstIndex + 2) % 12) + 1];
+            display1_1.textContent = pos1;
+            display1_2.textContent = pos2;
+            display1_3.textContent = pos3;
+            firstIndex++;
+          }, 80);
+        }
+      }
+      function startSecondReel() {
+        document.getElementById("secondStop").onclick() => {
+          secondInterval = false;
+          clearInterval(secondInterval);
+        }:
+        if (secondRunning) {
+          const secondInterval = setInterval(() => {
+            const pos1 = secondReel[(secondIndex % 12) + 1];
+            const pos2 = secondReel[((secondIndex + 1) % 12) + 1];
+            const pos3 = secondReel[((secondIndex + 2) % 12) + 1];
+            display2_1.textContent = pos1;
+            display2_2.textContent = pos2;
+            display2_3.textContent = pos3;
+            secondIndex++;
+          }, 80);
+        }
+      }
+      function startThirdReel() {
+        document.getElementById("thirdStop").onclick() => {
+          thirdRunning = false;
+          clearInterval(thirdInterval)
+        }
+        if (thirdRunning) {
+          const thirdInterval = setInterval(() => {
+            const pos1 = thirdReel[(thirdIndex % 12) + 1];
+            const pos2 = thirdReel[((thirdIndex + 1) % 12) + 1];
+            const pos3 = thirdReel[((thirdIndex + 2) % 12) + 1];
+            display3_1.textContent = pos1;
+            display3_2.textContent = pos2;
+            display3_3.textContent = pos3;
+            thirdIndex++;
+          }, 80);
+        }
+      }
       document.getElementById("spinButton").onclick = () => {
         if (firstRunning == false && secondRunning == false &&thirdRunning == false) {
           firstRunning = true;
           secondRunning = true;
           thirdRunning = true;
+          startFirstInterval();
+          startSecondInterval();
+          startThirdInterval();
         }
-      };
-      const firstInterval = setInterval(() => {
-        if (!firstRunning) {
-          clearInterval(firstInterval);
-          return;
-        }
-        const pos1 = firstReel[(firstIndex % 12) + 1];
-        const pos2 = firstReel[((firstIndex + 1) % 12) + 1];
-        const pos3 = firstReel[((firstIndex + 2) % 12) + 1];
-        display1_1.textContent = pos1;
-        display1_2.textContent = pos2;
-        display1_3.textContent = pos3;
-        firstIndex++;
-      }, 80);
-      document.getElementById("firstStop").onclick = () => {
-        firstRunning = false;
-      }
-      const secondInterval = setInterval(() => {
-        if (!secondRunning) {
-          clearInterval(secondInterval);
-          return;
-        };
-        const pos1 = secondReel[(secondIndex % 12) + 1];
-        const pos2 = secondReel[((secondIndex + 1) % 12) + 1];
-        const pos3 = secondReel[((secondIndex + 2) % 12) + 1];
-        display2_1.textContent = pos1;
-        display2_2.textContent = pos2;
-        display2_3.textContent = pos3;
-        secondIndex++;
-      }, 80);
-      document.getElementById("secondStop").onclick = () => {
-        secondRunning = false;
-      };
-      const thirdInterval = setInterval(() => {
-        if (!thirdRunning) {
-          clearInterval(thirdInterval);
-          return;
-        }
-        const pos1 = thirdReel[(thirdIndex % 12) + 1];
-        const pos2 = thirdReel[((thirdIndex + 1) % 12) + 1];
-        const pos3 = thirdReel[((thirdIndex + 2) % 12) + 1];
-        display3_1.textContent = pos1;
-        display3_2.textContent = pos2;
-        display3_3.textContent = pos3;
-        thirdIndex++;
-      }, 80);
-      document.getElementById("thirdStop").onclick = () => {
-        thirdRunning = false;
       };
     </script>
   </body>
