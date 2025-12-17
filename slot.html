@@ -53,6 +53,18 @@
         border-radius: 20px;
         cursor: pointer;
       }
+      .money {
+        display: grid;
+        grid-template-columns: 100px 100px;
+        grid-template-rows: 40px 40px;
+        font-size: 20px;
+      }
+      .money div {
+        border: 1px solid black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
     </style>
     <button class="betButton" id="betButton">BET</button>
     <button class="spinButton" id="spinButton">SPIN</button>
@@ -70,12 +82,19 @@
     <button class="stopButton" id="firstStop">STOP</button>
     <button class="stopButton" id="secondStop">STOP</button>
     <button class="stopButton" id="thirdStop">STOP</button>
+    <div class="money">
+      <div>CREDIT</div>
+      <div>PAYOUT</div>
+      <div id="credit"></div>
+      <div id="payout">
+    </div>
+    <div
     <script>
       const firstReel = {
-        1: "🍇", 2: "🍒", 3: "BAR", 4: "🦏", 5: "🍇", 6: "7", 7: "🦏", 8: "🤡", 9: "🍇", 10: "🔔", 11: "🦏", 12: "🍇"
+        1: "🍇", 2: "BAR", 3: "🍇", 4: "🔔", 5: "🍇", 6: "7", 7: "🦏", 8: "🤡", 9: "🍇", 10: "🦏", 11: "🍒", 12: "🦏"
       };
       const secondReel = {
-        1: "7", 2: "🍇", 3: "🔔", 4: "BAR", 5: "🍇", 6: "🍒", 7: "🦏", 8: "🍇", 9: "🤡", 10: "🦏", 11: "🍇", 12: "🦏"
+        1: "7", 2: "🍇", 3: "🔔", 4: "BAR", 5: "🍒", 6: "🍇", 7: "🦏", 8: "🍇", 9: "🤡", 10: "🦏", 11: "🍇", 12: "🦏"
       };
       const thirdReel = {
         1: "🍒", 2: "🦏", 3: "BAR", 4: "🍇", 5: "🦏", 6: "🍇", 7: "7", 8: "🤡", 9: "🍇", 10: "🔔", 11: "🦏", 12: "🍇"
