@@ -20,7 +20,7 @@
         font-size: 20px;
         justify-content: center;
       }
-      .slot div {
+      .slotCell {
         border: 1px solid black;
         display: flex;
         align-items: center;
@@ -85,27 +85,22 @@
         background-color: #233B6C;
         color: #B2B000;
       }
-      .nonBorder {
-        border-top: none !important;
-        border-bottom: none !important;
-        border-left: none !important;
-      }
     </style>
     <div class="game">
       <div class="slot">
         <button class="betButton" id="betButton">BET</button>
-        <div id="display1_1"></div>
-        <div id="display2_1"></div>
-        <div id="display3_1"></div>
+        <div class="slotCell" id="display1_1"></div>
+        <div class="slotCell" id="display2_1"></div>
+        <div class="slotCell" id="display3_1"></div>
         <button class="spinButton" id="spinButton">SPIN</button>
-        <div id="display1_2"></div>
-        <div id="display2_2"></div>
-        <div id="display3_2"></div>
+        <div class="slotCell" id="display1_2"></div>
+        <div class="slotCell" id="display2_2"></div>
+        <div class="slotCell" id="display3_2"></div>
         <div class="rump">GOGO!<br>CHANCE</div>
-        <div id="display1_3"></div>
-        <div id="display2_3"></div>
-        <div id="display3_3"></div>
-        <textarea></textarea>
+        <div class="slotCell" id="display1_3"></div>
+        <div class="slotCell" id="display2_3"></div>
+        <div class="slotCell" id="display3_3"></div>
+        <div></div>
         <button class="stopButton" id="firstStop">STOP</button>
         <button class="stopButton" id="secondStop">STOP</button>
         <button class="stopButton" id="thirdStop">STOP</button>
