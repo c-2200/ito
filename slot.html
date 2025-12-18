@@ -15,9 +15,9 @@
       }
       .slot {
         display: grid;
-        grid-template-columns: 120px 120px 120px;
+        grid-template-columns: 120px 120px 120px 120px;
         grid-template-rows: 50px 50px 50px 60px;
-        font-size: 20px
+        font-size: 20px;
         justify-content: center;
       }
       .slot div {
@@ -73,18 +73,20 @@
       }
     </style>
     <div class="game">
-      <button class="betButton" id="betButton">BET</button>
-      <button class="spinButton" id="spinButton">SPIN</button>
       <div class="slot">
+        <button class="betButton" id="betButton">BET</button>
         <div id="display1_1"></div>
         <div id="display2_1"></div>
         <div id="display3_1"></div>
+        <button class="spinButton" id="spinButton">SPIN</button>
         <div id="display1_2"></div>
         <div id="display2_2"></div>
         <div id="display3_2"></div>
+        <div id="rump"></div>
         <div id="display1_3"></div>
         <div id="display2_3"></div>
         <div id="display3_3"></div>
+        <div></div>
         <button class="stopButton" id="firstStop">STOP</button>
         <button class="stopButton" id="secondStop">STOP</button>
         <button class="stopButton" id="thirdStop">STOP</button>
