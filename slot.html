@@ -86,7 +86,9 @@
         color: #B2B000;
       }
       .nonBorder {
-        border: none;
+        border-top: none;
+        border-bottom: none;
+        border-left: none;
       }
     </style>
     <div class="game">
@@ -99,14 +101,11 @@
         <div id="display1_2"></div>
         <div id="display2_2"></div>
         <div id="display3_2"></div>
-        <textarea class="rump" id="rump">
-          GOGO!
-          CHANCE
-        </textarea>
+        <div class="rump">GOGO!<br>CHANCE</div>
         <div id="display1_3"></div>
         <div id="display2_3"></div>
         <div id="display3_3"></div>
-        <textarea rows="1" cols="1"></textarea>
+        <div class="nonBorder"><div>
         <button class="stopButton" id="firstStop">STOP</button>
         <button class="stopButton" id="secondStop">STOP</button>
         <button class="stopButton" id="thirdStop">STOP</button>
