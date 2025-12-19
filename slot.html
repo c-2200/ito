@@ -186,25 +186,49 @@
         firstRunning = false;
         clearInterval(firstInterval);
         firstInterval = null;
-      }
+      };
       document.getElementById("secondStop").onclick = () => {
         if (!secondRunning) return;
         secondRunning = false;
         clearInterval(secondInterval);
         secondInterval = null;
-      }
+      };
       document.getElementById("thirdStop").onclick = () => {
         if (!thirdRunning) return;
         thirdRunning = false;
         clearInterval(thirdInterval);
         thirdInterval = null;
-      }
+      };
       document.getElementById("spinButton").onclick = () => {
         if (firstRunning == false && secondRunning == false &&thirdRunning == false) {
           startFirstReel();
           startSecondReel();
           startThirdReel();
         }
+      };
+      document.addEventListener("keydown", (e) => {
+        if (e.key == "Enter") {
+          if (firstRunning == false && secondRunning == false &&thirdRunning == false) {
+            startFirstReel();
+            startSecondReel();
+            startThirdReel();
+          }
+        } elif (e.key == "a") {
+          if (!firstRunning) return;
+            firstRunning = false;
+            clearInterval(firstInterval);
+            firstInterval = null;
+        } elif (e.key == "s") {
+          if (!secondRunning) return;
+            secondRunning = false;
+            clearInterval(secondInterval);
+            secondInterval = null;
+        } elif (e.key == "d") {
+          if (!thirdRunning) return;
+            thirdRunning = false;
+            clearInterval(thirdInterval);
+            thirdInterval = null;
+        } elif (e.key == "b")
       };
     </script>
   </body>
