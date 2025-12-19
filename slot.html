@@ -213,22 +213,21 @@
             startSecondReel();
             startThirdReel();
           }
-        } elif (e.key == "a") {
+        } else if (e.key == "a") {
           if (!firstRunning) return;
             firstRunning = false;
             clearInterval(firstInterval);
             firstInterval = null;
-        } elif (e.key == "s") {
+        } else if (e.key == "s") {
           if (!secondRunning) return;
             secondRunning = false;
             clearInterval(secondInterval);
             secondInterval = null;
-        } elif (e.key == "d") {
+        } else if (e.key == "d") {
           if (!thirdRunning) return;
             thirdRunning = false;
             clearInterval(thirdInterval);
             thirdInterval = null;
-        } elif (e.key == "b")
       };
     </script>
   </body>
