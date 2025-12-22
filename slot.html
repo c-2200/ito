@@ -115,7 +115,7 @@
           <div class="slotCell" id="display1_2"></div>
           <div class="slotCell" id="display2_2"></div>
           <div class="slotCell" id="display3_2"></div>
-          <div class="rump">GOGO!<br>CHANCE</div>
+          <div class="rump" id="rump">GOGO!<br>CHANCE</div>
           <div class="slotCell" id="display1_3"></div>
           <div class="slotCell" id="display2_3"></div>
           <div class="slotCell" id="display3_3"></div>
@@ -287,7 +287,11 @@
             }
           }
         }
-      const lightChance = Math.floor(Math.random() * 150);
+        const lightChance = Math.floor(Math.random() * 150);
+        if (lightChance == 0) {
+          light = true;
+          document.getElementById("rump").classList.remove("rump").add("litRump")
+        }
       } else if (!firstRunning && !secondRunning && !thirdRunning && light) {
         const hand = handCheck();
         if (hand) {
