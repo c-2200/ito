@@ -259,8 +259,10 @@
         if (p1_3 == p2_3 == p3_3) hand.push(p1_3);
         if (p1_1 == p2_2 == p3_3) hand.push(p1_1);
         if (p1_3 == p2_2 == p3_1) hand.push(p1_3);
+        return hand;
       }
       if (!firstRunning && !secondRunning && !thirdRunning) {
+        const hand = handCheck()
         if (hand) {
           for (let i = 0; i <= hand.length; i++) {
             if (hand[i] == "🍇") {
