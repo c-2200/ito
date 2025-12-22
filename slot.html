@@ -94,6 +94,15 @@
         background-color: #233B6C;
         color: #B2B000;
       }
+      .litRump {
+        display: flex;
+        border: none;
+        font-size: 20px;
+        line-height: 1.2;
+        justify-content: center;
+        background-color: blue;
+        color: yellow;
+      }
     </style>
     <div class="layout">
       <div class="game">
@@ -142,6 +151,7 @@
       let firstInterval = null;
       let secondInterval = null;
       let thirdInterval = null;
+      let light = false
       const display1_1 = document.getElementById("display1_1");
       const display2_1 = document.getElementById("display2_1");
       const display3_1 = document.getElementById("display3_1");
@@ -261,8 +271,8 @@
         if (p1_3 == p2_2 == p3_1) hand.push(p1_3);
         return hand;
       }
-      if (!firstRunning && !secondRunning && !thirdRunning) {
-        const hand = handCheck()
+      if (!firstRunning && !secondRunning && !thirdRunning && !light) {
+        const hand = handCheck();
         if (hand) {
           for (let i = 0; i <= hand.length; i++) {
             if (hand[i] == "🍇") {
@@ -276,6 +286,12 @@
               payoutN += 15;
             }
           }
+        }
+      const lightChance = Math.floor(Math.random() * 150);
+      } else if (!firstRunning && !secondRunning && !thirdRunning && light) {
+        const hand = handCheck();
+        if (hand) {
+          
         }
       }
     </script>
