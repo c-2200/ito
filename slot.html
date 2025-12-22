@@ -20,6 +20,17 @@
         gap: 20px;
         justify-content: center;
       }
+      .counter {
+        display: grid;
+        grid-template-columns: 100px 140px 100px 140px;
+        justify-content: center;
+      }
+      .content {
+        font-size: 17px;
+      }
+      .number {
+        font-size: 22px;
+      }
       .slot {
         display: grid;
         grid-template-columns: 120px 120px 120px 120px;
@@ -106,6 +117,12 @@
     </style>
     <div class="layout">
       <div class="game">
+        <div class="counter">
+          <div class="content">BB</div>
+          <div class="number" id="BBN">0</div>
+          <div class="content">回転数</div>
+          <div class="number" id="spinN">0</div>
+        </div>
         <div class="slot">
           <button class="betButton" id="betButton">BET</button>
           <div class="slotCell" id="display1_1"></div>
@@ -151,7 +168,9 @@
       let firstInterval = null;
       let secondInterval = null;
       let thirdInterval = null;
-      let light = false
+      let light = false;
+      let BB = false;
+      let LB = false;
       const display1_1 = document.getElementById("display1_1");
       const display2_1 = document.getElementById("display2_1");
       const display3_1 = document.getElementById("display3_1");
@@ -262,17 +281,22 @@
         const p3_1 = display3_1.textContent;
         const p3_2 = display3_2.textContent;
         const p3_3 = display3_3.textContent;
-        const creditN = credit.textContent;
-        const payoutN = payout.textContent;
         if (p1_1 == p2_1 == p3_1) hand.push(p1_1);
         if (p1_2 == p2_2 == p3_2) hand.push(p1_2);
         if (p1_3 == p2_3 == p3_3) hand.push(p1_3);
         if (p1_1 == p2_2 == p3_3) hand.push(p1_1);
         if (p1_3 == p2_2 == p3_1) hand.push(p1_3);
+        if (p1_1 == p2_1 == "7" && p3_1 == "BAR") hand.push("L");
+        if (p1_2 == p2_2 == "7" && p3_2 == "BAR") hand.push("L");
+        if (p1_3 == p2_3 == "7" && p3_3 == "BAR") hand.push("L");
+        if (p1_1 == p2_2 == "7" && p3_3 == "BAR") hand.push("L");
+        if (p1_3 == p2_2 == "7" && p3_1 == "BAR") hand.push("L");
         return hand;
       }
-      if (!firstRunning && !secondRunning && !thirdRunning && !light) {
+      if (!firstRunning && !secondRunning && !thirdRunning && !BB && !LB) {
         const hand = handCheck();
+        const creditN = credit.textContent;
+        const payoutN = payout.textContent;
         if (hand) {
           for (let i = 0; i <= hand.length; i++) {
             if (hand[i] == "🍇") {
@@ -284,15 +308,21 @@
             } else if (hand[i] == "🤡") {
               creditN += 8;
               payoutN += 15;
+            } else if (hand[i] == "7") {
+              BB = true;
+            } else if (hand[i] == "L") {
+              LB = true;
             }
           }
         }
+        credit.textContent = creditN;
+        payout.textContent = payoutN;
         const lightChance = Math.floor(Math.random() * 150);
         if (lightChance == 0) {
           light = true;
           document.getElementById("rump").classList.remove("rump").add("litRump")
         }
-      } else if (!firstRunning && !secondRunning && !thirdRunning && light) {
+      } else if (!firstRunning && !secondRunning && !thirdRunning && BB) {
         const hand = handCheck();
         if (hand) {
           
