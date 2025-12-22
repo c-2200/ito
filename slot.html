@@ -252,21 +252,23 @@
         const p3_1 = display3_1.textContent;
         const p3_2 = display3_2.textContent;
         const p3_3 = display3_3.textContent;
+        const creditN = credit.textContent;
+        const payoutN = payout.textContent;
         if (p1_1 == p2_1 == p3_1) hand.push(p1_1);
         if (p1_2 == p2_2 == p3_2) hand.push(p1_2);
         if (p1_3 == p2_3 == p3_3) hand.push(p1_3);
         if (p1_1 == p2_2 == p3_3) hand.push(p1_1);
         if (p1_3 == p2_2 == p3_1) hand.push(p1_3);
+      }
+      if (!firstRunning && !secondRunning && !thirdRunning) {
         if (hand) {
           for (let i = 0; i <= hand.length; i++) {
             if (hand[i] == "🍇") {
-              c
+              creditN += 4;
+              payoutN += 7;
             }
           }
         }
-      }
-      if (!firstRunning && !secondRunning && !thirdRunning) {
-        
       }
     </script>
   </body>
