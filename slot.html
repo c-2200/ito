@@ -185,8 +185,8 @@
       const credit = document.getElementById("credit");
       const payout = document.getElementById("payout");
       const count = document.getElementById("count");
-      let BBN = Number(document.getElementById("BBN"));
-      let spinN = Number(document.getElementById("spinN"));
+      let BBN = document.getElementById("BBN");
+      let spinN = document.getElementById("spinN");
       let BBcount = 0;
       let LBcount = 0;
       
@@ -215,25 +215,23 @@
       }
       function onAllStop() {
         if (firstRunning || secondRunning || thirdRunning) return;
+        const hand = handCheck();
+        let creditN = Number(credit.textContent);
+        let payoutN = Number(payout.textContent);
+        let countN = Number(count.textContent);
         if (!BB && !LB) {
-          const hand = handCheck();
-          let creditN = Number(credit.textContent);
-          let payoutN = Number(payout.textContent);
-          let countN = Number(count.textContent);
-          if (hand) {
+          spinN.textContent = Number(spinN.textContent) + 1;
+          if (hand.length > 0) {
             for (let i = 0; i < hand.length; i++) {
               if (hand[i] == "🍇") {
                 creditN += 4;
                 payoutN += 7;
-                spinN.textContent += 1
               } else if (hand[i] == "🔔") {
                 creditN += 6;
                 payoutN += 11;
-                spinN.textContent += 1
               } else if (hand[i] == "🤡") {
                 creditN += 8;
                 payoutN += 15;
-                spinN.textContent += 1
               } else if (hand[i] == "7") {
                 BB = true;
                 BBN.textContent += 1;
@@ -254,7 +252,7 @@
           }
         } else if (BB) {
           const hand = handCheck();
-          if (hand) {
+          if (hand.length > 0) {
             for (let i = 0; i < hand.length; i++) {
               if (hand[i] == "🍇") {
                 creditN += 7;
@@ -264,9 +262,14 @@
                 return;
               }
             }
+            if (countN == 90) {
+              BB = false;
+              countN = 0;
+              payoutN = 0;
+            }
           }
         } else if (LB) {
-          if (hand) {
+          if (hand.length > 0) {
             for (let i = 0; i < hand.length; i++) {
               if (hand[i] == "🍇") {
                 creditN += 5;
@@ -275,6 +278,11 @@
               } else {
                 return;
               }
+            }
+            if (countN == 60) {
+              LB = false;
+              countN = 0;
+              payoutN = 0;
             }
           }
         }
