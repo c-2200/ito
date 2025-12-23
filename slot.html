@@ -145,9 +145,9 @@
           <div>CREDIT</div>
           <div>COUNT</div>
           <div>PAYOUT</div>
-          <div id="credit"></div>
-          <div id="count"></div>
-          <div id="payout"></div>
+          <div id="credit">0</div>
+          <div id="count">0</div>
+          <div id="payout">0</div>
         </div>
       </div>
     </div>
@@ -234,10 +234,16 @@
                 payoutN += 15;
               } else if (hand[i] == "7") {
                 BB = true;
-                BBN.textContent += 1;
+                BBN.textContent = Number(BBN.textContent) += 1;
+                document.getElementById("rump").classList.remove("litRump");
+                document.getElementById("rump").classList.add("rump");
+                light = false;
                 spinN.textContent = 0;
               } else if (hand[i] == "L") {
                 LB = true;
+                document.getElementById("rump").classList.remove("litRump");
+                document.getElementById("rump").classList.add("rump");
+                light = false;
                 spinN.textContent = 0;
               }
             }
@@ -251,7 +257,6 @@
             document.getElementById("rump").classList.add("litRump");
           }
         } else if (BB) {
-          const hand = handCheck();
           if (hand.length > 0) {
             for (let i = 0; i < hand.length; i++) {
               if (hand[i] == "🍇") {
@@ -268,6 +273,9 @@
               payoutN = 0;
             }
           }
+          credit.textContent = creditN;
+          payout.textContent = payoutN;
+          count.textContent = countN;
         } else if (LB) {
           if (hand.length > 0) {
             for (let i = 0; i < hand.length; i++) {
@@ -275,8 +283,6 @@
                 creditN += 5;
                 payoutN += 10;
                 countN += 10;
-              } else {
-                return;
               }
             }
             if (countN == 60) {
@@ -285,7 +291,11 @@
               payoutN = 0;
             }
           }
+          credit.textContent = creditN;
+          payout.textContent = payoutN;
+          count.textContent = countN;
         }
+      }
       function startFirstReel() {
         if (firstRunning) return;
         firstRunning = true;
