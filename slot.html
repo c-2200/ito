@@ -86,8 +86,8 @@
       }
       .money {
         display: grid;
-        grid-template-columns: 100px 100px;
-        grid-template-rows: 40px 40px;
+        grid-template-columns: 100px 150px 100px;
+        grid-template-rows: 40px 40px 40px;
         font-size: 20px;
       }
       .money div {
@@ -143,8 +143,10 @@
         </div>
         <div class="money">
           <div>CREDIT</div>
+          <div>COUNT</div>
           <div>PAYOUT</div>
           <div id="credit"></div>
+          <div id="count"></div>
           <div id="payout"></div>
         </div>
       </div>
@@ -182,8 +184,12 @@
       const display3_3 = document.getElementById("display3_3");
       const credit = document.getElementById("credit");
       const payout = document.getElementById("payout");
-      const BBN = document.getElementById("BBN");
-      const spinN = document.getElementById("spinN");
+      const count = document.getElementById("count");
+      let BBN = Number(document.getElementById("BBN"));
+      let spinN = Number(document.getElementById("spinN"));
+      let BBcount = 0;
+      let LBcount = 0;
+      
       function handCheck() {
         const hand = [];
         const p1_1 = display1_1.textContent;
@@ -195,18 +201,83 @@
         const p3_1 = display3_1.textContent;
         const p3_2 = display3_2.textContent;
         const p3_3 = display3_3.textContent;
-        if (p1_1 == p2_1 == p3_1) hand.push(p1_1);
-        if (p1_2 == p2_2 == p3_2) hand.push(p1_2);
-        if (p1_3 == p2_3 == p3_3) hand.push(p1_3);
-        if (p1_1 == p2_2 == p3_3) hand.push(p1_1);
-        if (p1_3 == p2_2 == p3_1) hand.push(p1_3);
-        if (p1_1 == p2_1 == "7" && p3_1 == "BAR") hand.push("L");
-        if (p1_2 == p2_2 == "7" && p3_2 == "BAR") hand.push("L");
-        if (p1_3 == p2_3 == "7" && p3_3 == "BAR") hand.push("L");
-        if (p1_1 == p2_2 == "7" && p3_3 == "BAR") hand.push("L");
-        if (p1_3 == p2_2 == "7" && p3_1 == "BAR") hand.push("L");
+        if (p1_1 == p2_1 && p2_1 == p3_1) hand.push(p1_1);
+        if (p1_2 == p2_2 && p2_2 == p3_2) hand.push(p1_2);
+        if (p1_3 == p2_3 && p2_3 == p3_3) hand.push(p1_3);
+        if (p1_1 == p2_2 && p2_2 == p3_3) hand.push(p1_1);
+        if (p1_3 == p2_2 && p2_2 == p3_1) hand.push(p1_3);
+        if (p1_1 == p2_1 && p2_1 == "7" && p3_1 == "BAR") hand.push("L");
+        if (p1_2 == p2_2 && p2_2 == "7" && p3_2 == "BAR") hand.push("L");
+        if (p1_3 == p2_3 && p2_3 == "7" && p3_3 == "BAR") hand.push("L");
+        if (p1_1 == p2_2 && p2_2== "7" && p3_3 == "BAR") hand.push("L");
+        if (p1_3 == p2_2 && p2_2 == "7" && p3_1 == "BAR") hand.push("L");
         return hand;
       }
+      function onAllStop() {
+        if (firstRunning || secondRunning || thirdRunning) return;
+        if (!BB && !LB) {
+          const hand = handCheck();
+          let creditN = Number(credit.textContent);
+          let payoutN = Number(payout.textContent);
+          let countN = Number(count.textContent);
+          if (hand) {
+            for (let i = 0; i < hand.length; i++) {
+              if (hand[i] == "🍇") {
+                creditN += 4;
+                payoutN += 7;
+                spinN.textContent += 1
+              } else if (hand[i] == "🔔") {
+                creditN += 6;
+                payoutN += 11;
+                spinN.textContent += 1
+              } else if (hand[i] == "🤡") {
+                creditN += 8;
+                payoutN += 15;
+                spinN.textContent += 1
+              } else if (hand[i] == "7") {
+                BB = true;
+                BBN.textContent += 1;
+                spinN.textContent = 0;
+              } else if (hand[i] == "L") {
+                LB = true;
+                spinN.textContent = 0;
+              }
+            }
+          }
+          credit.textContent = creditN;
+          payout.textContent = payoutN;
+          const lightChance = Math.floor(Math.random() * 150);
+          if (lightChance == 0) {
+            light = true;
+            document.getElementById("rump").classList.remove("rump");
+            document.getElementById("rump").classList.add("litRump");
+          }
+        } else if (BB) {
+          const hand = handCheck();
+          if (hand) {
+            for (let i = 0; i < hand.length; i++) {
+              if (hand[i] == "🍇") {
+                creditN += 7;
+                payoutN += 15;
+                countN += 15;
+              } else {
+                return;
+              }
+            }
+          }
+        } else if (LB) {
+          if (hand) {
+            for (let i = 0; i < hand.length; i++) {
+              if (hand[i] == "🍇") {
+                creditN += 5;
+                payoutN += 10;
+                countN += 10;
+              } else {
+                return;
+              }
+            }
+          }
+        }
       function startFirstReel() {
         if (firstRunning) return;
         firstRunning = true;
@@ -251,18 +322,21 @@
         firstRunning = false;
         clearInterval(firstInterval);
         firstInterval = null;
+        onAllStop();
       };
       document.getElementById("secondStop").onclick = () => {
         if (!secondRunning) return;
         secondRunning = false;
         clearInterval(secondInterval);
         secondInterval = null;
+        onAllStop();
       };
       document.getElementById("thirdStop").onclick = () => {
         if (!thirdRunning) return;
         thirdRunning = false;
         clearInterval(thirdInterval);
         thirdInterval = null;
+        onAllStop();
       };
       document.getElementById("spinButton").onclick = () => {
         if (firstRunning == false && secondRunning == false &&thirdRunning == false) {
@@ -283,62 +357,21 @@
           firstRunning = false;
           clearInterval(firstInterval);
           firstInterval = null;
+          onAllStop();
         } else if (e.key == "s") {
           if (!secondRunning) return;
           secondRunning = false;
           clearInterval(secondInterval);
           secondInterval = null;
+          onAllStop();
         } else if (e.key == "d") {
           if (!thirdRunning) return;
           thirdRunning = false;
           clearInterval(thirdInterval);
           thirdInterval = null;
+          onAllStop();
         }
       });
-      function onAllStop() {
-        if (firstRunning || secondRunning || thirdRunning) return;
-        if (!BB && !LB) {
-          const hand = handCheck();
-          const creditN = credit.textContent;
-          const payoutN = payout.textContent;
-          if (hand) {
-            for (let i = 0; i <= hand.length; i++) {
-              if (hand[i] == "🍇") {
-                creditN += 4;
-                payoutN += 7;
-                spinN.textContent += 1
-              } else if (hand[i] == "🔔") {
-                creditN += 6;
-                payoutN += 11;
-                spinN.textContent += 1
-              } else if (hand[i] == "🤡") {
-                creditN += 8;
-                payoutN += 15;
-                spinN.textContent += 1
-              } else if (hand[i] == "7") {
-                BB = true;
-                BBN.textContent += 1;
-                spinN.textContent = 0;
-              } else if (hand[i] == "L") {
-                LB = true;
-                spinN.textContent = 0;
-              }
-            }
-          }
-          credit.textContent = creditN;
-          payout.textContent = payoutN;
-          const lightChance = Math.floor(Math.random() * 150);
-          if (lightChance == 0) {
-            light = true;
-            document.getElementById("rump").classList.remove("rump").add("litRump")
-          }
-        } else if (BB) {
-          const hand = handCheck();
-          if (hand) {
-            
-          }
-        }
-      }
     </script>
   </body>
 </html>
