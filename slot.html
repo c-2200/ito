@@ -189,7 +189,12 @@
       let spinN = document.getElementById("spinN");
       let BBcount = 0;
       let LBcount = 0;
-      
+
+      function bonus() {
+        if (light) {
+          
+        }
+      }
       function handCheck() {
         const hand = [];
         const p1_1 = display1_1.textContent;
@@ -340,6 +345,15 @@
         firstRunning = false;
         clearInterval(firstInterval);
         firstInterval = null;
+        if (light) {
+          if (3 <= (firstIndex % 12) + 1 && (firstIndex % 12) + 1 <= 5) {
+            if (!secondRunning && !thirdRunning) {
+              for (i = firstIndex; i <= 6; i++) {
+                
+              }
+            }
+          }
+        }
         onAllStop();
       };
       document.getElementById("secondStop").onclick = () => {
