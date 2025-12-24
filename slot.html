@@ -170,7 +170,7 @@
       let firstInterval = null;
       let secondInterval = null;
       let thirdInterval = null;
-      let light = false;
+      let light = true;
       let BB = false;
       let LB = false;
       const display1_1 = document.getElementById("display1_1");
@@ -342,13 +342,14 @@
       }
       document.getElementById("firstStop").onclick = async () => {
         if (!firstRunning) return;
+        firstRunning = false;
         clearInterval(firstInterval);
         firstInterval = null;
         if (light) {
           if (!secondRunning && !thirdRunning) {
             if (3 <= (firstIndex % 12) + 1 && (firstIndex % 12) + 1 <= 5) {
               const slip = 5 - (firstIndex % 12)
-              for (i = 0; i < slip; i++) {
+              for (let i = 0; i < slip; i++) {
                 firstIndex++;
                 const pos1 = firstReel[(firstIndex % 12) + 1];
                 const pos2 = firstReel[((firstIndex - 1) % 12) + 1];
@@ -359,10 +360,12 @@
                 await sleep(60);
               }
             }
-          } else if (secondRunning && !thirdRunning) {
+          } else if (!secondRunning && thirdRunning) {
             if (secondIndex % 12 == 0 || secondIndex % 12 == 1) {
               if (2 <= firstIndex % 12 && firstIndex % 12 <= 4) {
-                for (firstIndex += 1; firstIndex % 12 <= 5; firstIndex++) {
+                const slip = 5 - (firstIndex % 12)
+                for (let i = 0; i < slip; i++) {
+                  firstIndex++;
                   const pos1 = firstReel[(firstIndex % 12) + 1];
                   const pos2 = firstReel[((firstIndex - 1) % 12) + 1];
                   const pos3 = firstReel[((firstIndex - 2) % 12) + 1];
@@ -374,7 +377,61 @@
               }
             } else if (secondIndex % 12 == 2) {
               if (4 <= firstIndex % 12 && firstIndex % 12 <= 6) {
-                for (firstIndex += 1; firstIndex % 12 <= 7; firstIndex++) {
+                const slip = 7 - (firstIndex % 12)
+                for (let i = 0; i < slip; i++) {
+                  firstIndex++;
+                  const pos1 = firstReel[(firstIndex % 12) + 1];
+                  const pos2 = firstReel[((firstIndex - 1) % 12) + 1];
+                  const pos3 = firstReel[((firstIndex - 2) % 12) + 1];
+                  display1_1.textContent = pos1;
+                  display1_2.textContent = pos2;
+                  display1_3.textContent = pos3;
+                  await sleep(60);
+                }
+              }
+            }
+          } else if (secondRunning && !thirdRunning) {
+            if (thirdIndex % 12 == 3) {
+              if (2 <= firstIndex % 12 && firstIndex % 12 <= 4) {
+                const slip = 5 - (firstIndex % 12)
+                for (let i = 0; i < slip; i++) {
+                  firstIndex++;
+                  const pos1 = firstReel[(firstIndex % 12) + 1];
+                  const pos2 = firstReel[((firstIndex - 1) % 12) + 1];
+                  const pos3 = firstReel[((firstIndex - 2) % 12) + 1];
+                  display1_1.textContent = pos1;
+                  display1_2.textContent = pos2;
+                  display1_3.textContent = pos3;
+                  await sleep(60);
+                }
+              }
+            } else if (thirdIndex % 12 == 4 || thirdIndex == 3) {
+              if (3 <= firstIndex % 12 && firstIndex % 12 <= 5) {
+                const slip = 6 - (firstIndex % 12)
+                for (let i = 0; i < slip; i++) {
+                  firstIndex++;
+                  const pos1 = firstReel[(firstIndex % 12) + 1];
+                  const pos2 = firstReel[((firstIndex - 1) % 12) + 1];
+                  const pos3 = firstReel[((firstIndex - 2) % 12) + 1];
+                  display1_1.textContent = pos1;
+                  display1_2.textContent = pos2;
+                  display1_3.textContent = pos3;
+                  await sleep(60);
+                }
+              }
+            } else if (thirdIndex % 12 == 5) {
+              if (firstIndex == 6 ) {
+                firstIndex++;
+                const pos1 = firstReel[(firstIndex % 12) + 1];
+                const pos2 = firstReel[((firstIndex - 1) % 12) + 1];
+                const pos3 = firstReel[((firstIndex - 2) % 12) + 1];
+                display1_1.textContent = pos1;
+                display1_2.textContent = pos2;
+                display1_3.textContent = pos3;
+              } else if (2 <= firstIndex % 12 && firstIndex % 12 <= 4) {
+                const slip = 5 - (firstIndex % 12)
+                for (let i = 0; i < slip; i++) {
+                  firstIndex++;
                   const pos1 = firstReel[(firstIndex % 12) + 1];
                   const pos2 = firstReel[((firstIndex - 1) % 12) + 1];
                   const pos3 = firstReel[((firstIndex - 2) % 12) + 1];
@@ -387,7 +444,6 @@
             }
           }
         }
-        firstRunning = false;
         onAllStop();
       };
       document.getElementById("secondStop").onclick = () => {
