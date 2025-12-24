@@ -340,15 +340,16 @@
           thirdIndex++;
         }, 60);
       }
-      document.getElementById("firstStop").onclick = () => {
+      document.getElementById("firstStop").onclick = async () => {
         if (!firstRunning) return;
-        firstRunning = false;
         clearInterval(firstInterval);
         firstInterval = null;
         if (light) {
           if (!secondRunning && !thirdRunning) {
             if (3 <= (firstIndex % 12) + 1 && (firstIndex % 12) + 1 <= 5) {
-              for (firstIndex += 1; firstIndex % 12 <= 5; firstIndex++) {
+              const slip = 5 - (firstIndex % 12)
+              for (i = 0; i < slip; i++) {
+                firstIndex++;
                 const pos1 = firstReel[(firstIndex % 12) + 1];
                 const pos2 = firstReel[((firstIndex - 1) % 12) + 1];
                 const pos3 = firstReel[((firstIndex - 2) % 12) + 1];
@@ -386,6 +387,7 @@
             }
           }
         }
+        firstRunning = false;
         onAllStop();
       };
       document.getElementById("secondStop").onclick = () => {
