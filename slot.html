@@ -346,10 +346,42 @@
         clearInterval(firstInterval);
         firstInterval = null;
         if (light) {
-          if (3 <= (firstIndex % 12) + 1 && (firstIndex % 12) + 1 <= 5) {
-            if (!secondRunning && !thirdRunning) {
-              for (i = firstIndex; i <= 6; i++) {
-                
+          if (!secondRunning && !thirdRunning) {
+            if (3 <= (firstIndex % 12) + 1 && (firstIndex % 12) + 1 <= 5) {
+              for (firstIndex += 1; firstIndex % 12 <= 5; firstIndex++) {
+                const pos1 = firstReel[(firstIndex % 12) + 1];
+                const pos2 = firstReel[((firstIndex - 1) % 12) + 1];
+                const pos3 = firstReel[((firstIndex - 2) % 12) + 1];
+                display1_1.textContent = pos1;
+                display1_2.textContent = pos2;
+                display1_3.textContent = pos3;
+                await sleep(60);
+              }
+            }
+          } else if (secondRunning && !thirdRunning) {
+            if (secondIndex % 12 == 0 || secondIndex % 12 == 1) {
+              if (2 <= firstIndex % 12 && firstIndex % 12 <= 4) {
+                for (firstIndex += 1; firstIndex % 12 <= 5; firstIndex++) {
+                  const pos1 = firstReel[(firstIndex % 12) + 1];
+                  const pos2 = firstReel[((firstIndex - 1) % 12) + 1];
+                  const pos3 = firstReel[((firstIndex - 2) % 12) + 1];
+                  display1_1.textContent = pos1;
+                  display1_2.textContent = pos2;
+                  display1_3.textContent = pos3;
+                  await sleep(60);
+                }
+              }
+            } else if (secondIndex % 12 == 2) {
+              if (4 <= firstIndex % 12 && firstIndex % 12 <= 6) {
+                for (firstIndex += 1; firstIndex % 12 <= 7; firstIndex++) {
+                  const pos1 = firstReel[(firstIndex % 12) + 1];
+                  const pos2 = firstReel[((firstIndex - 1) % 12) + 1];
+                  const pos3 = firstReel[((firstIndex - 2) % 12) + 1];
+                  display1_1.textContent = pos1;
+                  display1_2.textContent = pos2;
+                  display1_3.textContent = pos3;
+                  await sleep(60);
+                }
               }
             }
           }
