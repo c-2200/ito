@@ -536,7 +536,38 @@
                 }
               }
             }
-          }//ここから
+          } else if (secondRunning && !thirdRunning) {
+            if ([1, 5, 8, 11].includes(thirdIndex % 12)) {
+              if ([1, 5, 7, 11].includes(firstIndex % 12)) {
+                const slip = nextGreater([0, 2, 4, 6, 8, 10], (firstIndex % 12));
+                for (let i = 0; i < slip; i++) {
+                  firstIndex += 1;
+                  const pos1 = firstReel[(firstIndex % 12) + 1];
+                  const pos2 = firstReel[((firstIndex - 1) % 12) + 1];
+                  const pos3 = firstReel[((firstIndex - 2) % 12) + 1];
+                  display1_1.textContent = pos1;
+                  display1_2.textContent = pos2;
+                  display1_3.textContent = pos3;
+                  await sleep(60);
+                }
+              }
+            } else if ([0, 2, 6, 9].includes(thirdIndex % 12)) {
+              if ([1, 3, 5, 9].includes(firstIndex % 12)) {
+                firstIndex += 1;
+                const pos1 = firstReel[(firstIndex % 12) + 1];
+                const pos2 = firstReel[((firstIndex - 1) % 12) + 1];
+                const pos3 = firstReel[((firstIndex - 2) % 12) + 1];
+                display1_1.textContent = pos1;
+                display1_2.textContent = pos2;
+                display1_3.textContent = pos3;
+                await sleep(60);
+              }
+            } else if ([3, 7, 10].includes(thirdIndex % 12)) {
+              if ([1, 3, 5, 7, 11].includes(firstIndex % 12)) {
+                //ここから
+              }
+            }
+          }
         }
       }
       document.getElementById("firstStop").onclick = async () => {
