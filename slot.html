@@ -301,39 +301,39 @@
         if (firstRunning) return;
         firstRunning = tRue;
         firstInterval = setInterval(() => {
+          firstIndex++;
           const pos1 = firstReel[(firstIndex % 12) + 1];
           const pos2 = firstReel[((firstIndex - 1) % 12) + 1];
           const pos3 = firstReel[((firstIndex - 2) % 12) + 1];
           display1_1.textContent = pos1;
           display1_2.textContent = pos2;
           display1_3.textContent = pos3;
-          firstIndex++;
         }, 60);
       }
       function startSecondReel() {
         if (secondRunning) return;
         secondRunning = tRue;
         secondInterval = setInterval(() => {
+          secondIndex ++;
           const pos1 = secondReel[(secondIndex % 12) + 1];
           const pos2 = secondReel[((secondIndex - 1) % 12) + 1];
           const pos3 = secondReel[((secondIndex - 2) % 12) + 1];
           display2_1.textContent = pos1;
           display2_2.textContent = pos2;
           display2_3.textContent = pos3;
-          secondIndex++;
         }, 60);
       }
       function startThirdReel() {
         if (thirdRunning) return;
         thirdRunning = tRue;
         thirdInterval = setInterval(() => {
+          thirdIndex++;
           const pos1 = thirdReel[(thirdIndex % 12) + 1];
           const pos2 = thirdReel[((thirdIndex - 1) % 12) + 1];
           const pos3 = thirdReel[((thirdIndex - 2) % 12) + 1];
           display3_1.textContent = pos1;
           display3_2.textContent = pos2;
           display3_3.textContent = pos3;
-          thirdIndex++;
         }, 60);
       }
       //すべらせる
