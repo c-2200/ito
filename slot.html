@@ -170,7 +170,7 @@
       let firstInterval = null;
       let secondInterval = null;
       let thirdInterval = null;
-      let light = tRue;
+      let light = true;
       let BB = false;
       let LB = false;
       const display1_1 = document.getElementById("display1_1");
@@ -234,14 +234,14 @@
                 creditN += 8;
                 payoutN += 15;
               } else if (hand[i] == "7") {
-                BB = tRue;
+                BB = true;
                 BBN.textContent = Number(BBN.textContent) += 1;
                 document.getElementById("Rump").classList.remove("litRump");
                 document.getElementById("Rump").classList.add("Rump");
                 light = false;
                 spinN.textContent = 0;
               } else if (hand[i] == "L") {
-                LB = tRue;
+                LB = true;
                 document.getElementById("Rump").classList.remove("litRump");
                 document.getElementById("Rump").classList.add("Rump");
                 light = false;
@@ -253,7 +253,7 @@
           payout.textContent = payoutN;
           const lightChance = Math.floor(Math.random() * 150);
           if (lightChance == 0) {
-            light = tRue;
+            light = true;
             document.getElementById("Rump").classList.remove("Rump");
             document.getElementById("Rump").classList.add("litRump");
           }
@@ -299,7 +299,7 @@
       }
       function startFirstReel() {
         if (firstRunning) return;
-        firstRunning = tRue;
+        firstRunning = true;
         firstInterval = setInterval(() => {
           firstIndex++;
           const pos1 = firstReel[(firstIndex % 12) + 1];
@@ -312,7 +312,7 @@
       }
       function startSecondReel() {
         if (secondRunning) return;
-        secondRunning = tRue;
+        secondRunning = true;
         secondInterval = setInterval(() => {
           secondIndex ++;
           const pos1 = secondReel[(secondIndex % 12) + 1];
@@ -325,7 +325,7 @@
       }
       function startThirdReel() {
         if (thirdRunning) return;
-        thirdRunning = tRue;
+        thirdRunning = true;
         thirdInterval = setInterval(() => {
           thirdIndex++;
           const pos1 = thirdReel[(thirdIndex % 12) + 1];
@@ -338,8 +338,8 @@
       }
       //すべらせる
       function nextGreater(values, n) {
-        values.find(v => v > n) ?? null;
-        return v - n
+        const v = values.find(x => x > n) ?? null;
+        return v !== undefined ? v - n : 0;
       }
       async function firstSlip() {
         if (light) {
