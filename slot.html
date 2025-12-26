@@ -96,7 +96,7 @@
         align-items: center;
         justify-content: center;
       }
-      .rump {
+      .Rump {
         display: flex;
         border: none;
         font-size: 20px;
@@ -132,7 +132,7 @@
           <div class="slotCell" id="display1_2"></div>
           <div class="slotCell" id="display2_2"></div>
           <div class="slotCell" id="display3_2"></div>
-          <div class="rump" id="rump">GOGO!<br>CHANCE</div>
+          <div class="Rump" id="Rump">GOGO!<br>CHANCE</div>
           <div class="slotCell" id="display1_3"></div>
           <div class="slotCell" id="display2_3"></div>
           <div class="slotCell" id="display3_3"></div>
@@ -170,7 +170,7 @@
       let firstInterval = null;
       let secondInterval = null;
       let thirdInterval = null;
-      let light = true;
+      let light = tRue;
       let BB = false;
       let LB = false;
       const display1_1 = document.getElementById("display1_1");
@@ -234,16 +234,16 @@
                 creditN += 8;
                 payoutN += 15;
               } else if (hand[i] == "7") {
-                BB = true;
+                BB = tRue;
                 BBN.textContent = Number(BBN.textContent) += 1;
-                document.getElementById("rump").classList.remove("litRump");
-                document.getElementById("rump").classList.add("rump");
+                document.getElementById("Rump").classList.remove("litRump");
+                document.getElementById("Rump").classList.add("Rump");
                 light = false;
                 spinN.textContent = 0;
               } else if (hand[i] == "L") {
-                LB = true;
-                document.getElementById("rump").classList.remove("litRump");
-                document.getElementById("rump").classList.add("rump");
+                LB = tRue;
+                document.getElementById("Rump").classList.remove("litRump");
+                document.getElementById("Rump").classList.add("Rump");
                 light = false;
                 spinN.textContent = 0;
               }
@@ -253,9 +253,9 @@
           payout.textContent = payoutN;
           const lightChance = Math.floor(Math.random() * 150);
           if (lightChance == 0) {
-            light = true;
-            document.getElementById("rump").classList.remove("rump");
-            document.getElementById("rump").classList.add("litRump");
+            light = tRue;
+            document.getElementById("Rump").classList.remove("Rump");
+            document.getElementById("Rump").classList.add("litRump");
           }
         } else if (BB) {
           if (hand.length > 0) {
@@ -299,7 +299,7 @@
       }
       function startFirstReel() {
         if (firstRunning) return;
-        firstRunning = true;
+        firstRunning = tRue;
         firstInterval = setInterval(() => {
           const pos1 = firstReel[(firstIndex % 12) + 1];
           const pos2 = firstReel[((firstIndex - 1) % 12) + 1];
@@ -312,7 +312,7 @@
       }
       function startSecondReel() {
         if (secondRunning) return;
-        secondRunning = true;
+        secondRunning = tRue;
         secondInterval = setInterval(() => {
           const pos1 = secondReel[(secondIndex % 12) + 1];
           const pos2 = secondReel[((secondIndex - 1) % 12) + 1];
@@ -325,7 +325,7 @@
       }
       function startThirdReel() {
         if (thirdRunning) return;
-        thirdRunning = true;
+        thirdRunning = tRue;
         thirdInterval = setInterval(() => {
           const pos1 = thirdReel[(thirdIndex % 12) + 1];
           const pos2 = thirdReel[((thirdIndex - 1) % 12) + 1];
@@ -438,7 +438,7 @@
                 }
               }
             }
-          } else if (!secondRunning && !thirdRUnning) {
+          } else if (!secondRunning && !thirdRunning) {
             if ((secondIndex % 12 == 0 && thirdIndex % 12 == 3) || (secondIndex % 12 == 1 && thirdIndex % 12 == 5)) {
               if (2 <= firstIndex % 12 && firstIndex % 12 <= 4) {
                 const slip = 5 - (firstIndex % 12);
@@ -577,7 +577,7 @@
                 }
               }
             }
-          } else if (!secondRunning && !thirdRUnning) {
+          } else if (!secondRunning && !thirdRunning) {
             if ((p2_1 == "🍇" && p3_1 == "🍇") || (p2_2 == "🍇" && p3_3 == "🍇")) {
               if (![0, 2, 4, 8].includes(firstIndex % 12)) {
                 const slip = nextGreater([2, 4, 8, 12], firstIndex % 12);
@@ -623,7 +623,7 @@
             }
           }
         } else {
-          if (!secondRUnning && !thirdRUnning) {
+          if (!secondRunning && !thirdRunning) {
             if ((p2_1 == "7" && p3_1 == "7") || (p2_2 == "7" && p3_3 == "7")) {
               if (firstIndex % 12 == 5) {
                 firstIndex += 1;
@@ -676,7 +676,7 @@
                 await sleep(60);
               }
             }
-          } else if (!firstRUnning && thirdRUnning) {
+          } else if (!firstRunning && thirdRunning) {
             if (p1_1 == "7") {
               if (9 <= secondIndex % 12 && secondIndex % 12 <= 11) {
                 for (let i = 0; i < 3; i++) {
@@ -719,7 +719,7 @@
                 }
               }
             }
-          } else if (firstRUnning && !thirdRunning) {
+          } else if (firstRunning && !thirdRunning) {
             if (p3_1 == "7") {
               if (9 <= secondIndex % 12 && secondIndex % 12 <= 11) {
                 for (let i = 0; i < 3; i++) {
@@ -762,7 +762,7 @@
                 }
               }
             }
-          } else if (!firstRunning && !thirdRUnning) {
+          } else if (!firstRunning && !thirdRunning) {
             if (p1_1 == "7" && p3_1 == "7") {
               if ([9, 10, 11].includes(secondIndex % 12)) {
                 while ([9, 10, 11].includes(secondIndex % 12)) {
@@ -805,7 +805,7 @@
             }
           }
         } if (BB || LB) {
-          if (firstRunning && thirdRUnning) {
+          if (firstRunning && thirdRunning) {
             if (secondIndex % 12 == 4) {
               secondIndex += 1;
               const pos1 = secondReel[(secondIndex % 12) + 1];
