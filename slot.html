@@ -182,15 +182,6 @@
       const display1_3 = document.getElementById("display1_3");
       const display2_3 = document.getElementById("display2_3");
       const display3_3 = document.getElementById("display3_3");
-      const p1_1 = display1_1.textContent;
-      const p1_2 = display1_2.textContent;
-      const p1_3 = display1_3.textContent;
-      const p2_1 = display2_1.textContent;
-      const p2_2 = display2_2.textContent;
-      const p2_3 = display2_3.textContent;
-      const p3_1 = display3_1.textContent;
-      const p3_2 = display3_2.textContent;
-      const p3_3 = display3_3.textContent;
       const credit = document.getElementById("credit");
       const payout = document.getElementById("payout");
       const count = document.getElementById("count");
@@ -199,19 +190,24 @@
       let BBcount = 0;
       let LBcount = 0;
 
+      //図柄確認
+      function pictureCheck() {
+        return {
+          p1_1: display1_1.textContent, p1_2: display1_2.textContent, p1_3: display1_3.textContent, p2_1: display2_1.textContent,
+          p2_2: display2_2.textContent, p2_3: display2_3.textContent, p3_1: display3_1.textContent, p3_2: display3_2.textContent,
+          p3_3: display3_3.textContent
+        }
+      }
       //役チェック
       function handCheck() {
         const hand = [];
-        if (p1_1 == p2_1 && p2_1 == p3_1) hand.push(p1_1);
-        if (p1_2 == p2_2 && p2_2 == p3_2) hand.push(p1_2);
-        if (p1_3 == p2_3 && p2_3 == p3_3) hand.push(p1_3);
-        if (p1_1 == p2_2 && p2_2 == p3_3) hand.push(p1_1);
-        if (p1_3 == p2_2 && p2_2 == p3_1) hand.push(p1_3);
-        if (p1_1 == p2_1 && p2_1 == "7" && p3_1 == "BAR") hand.push("L");
-        if (p1_2 == p2_2 && p2_2 == "7" && p3_2 == "BAR") hand.push("L");
-        if (p1_3 == p2_3 && p2_3 == "7" && p3_3 == "BAR") hand.push("L");
-        if (p1_1 == p2_2 && p2_2== "7" && p3_3 == "BAR") hand.push("L");
-        if (p1_3 == p2_2 && p2_2 == "7" && p3_1 == "BAR") hand.push("L");
+        const result = pictureCheck();
+        if (result.p1_1 == result.p2_1 && result.p2_1 == result.p3_1) hand.push(result.p1_1);
+        if (result.p1_2 == result.p2_2 && result.p2_2 == result.p3_2) hand.push(result.p1_2);
+        if (result.p1_3 == result.p2_3 && result.p2_3 == result.p3_3) hand.push(result.p1_3);
+        if (result.p1_1 == result.p2_2 && result.p2_2 == result.p3_3) hand.push(result.p1_1);
+        if (result.p1_3 == result.p2_2 && result.p2_2 == result.p3_1) hand.push(result.p1_3);
+        if (result.p1_2 == result.p2_2 && result.p2_2 == "7" && result.p3_2 == "BAR") hand.push("L");
         return hand;
       }
       function onAllStop() {
@@ -342,6 +338,7 @@
         return v !== undefined ? v - n : 0;
       }
       async function firstSlip() {
+        const result = pictureCheck();
         if (light) {
           if (secondRunning && thirdRunning) {
             if (3 <= (firstIndex % 12) + 1 && (firstIndex % 12) + 1 <= 5) {
@@ -578,7 +575,7 @@
               }
             }
           } else if (!secondRunning && !thirdRunning) {
-            if ((p2_1 == "🍇" && p3_1 == "🍇") || (p2_2 == "🍇" && p3_3 == "🍇")) {
+            if ((result.p2_1 == "🍇" && result.p3_1 == "🍇") || (result.p2_2 == "🍇" && result.p3_3 == "🍇")) {
               if (![0, 2, 4, 8].includes(firstIndex % 12)) {
                 const slip = nextGreater([2, 4, 8, 12], firstIndex % 12);
                 for (let i = 0; i < slip; i++) {
@@ -592,7 +589,7 @@
                   await sleep(60);
                 }
               }
-            } else if (p2_2 == "🍇" && p3_2 == "🍇") {
+            } else if (result.p2_2 == "🍇" && result.p3_2 == "🍇") {
               if (![1, 3, 5, 9].includes(firstIndex % 12)) {
                 const slip = nextGreater([1, 3, 5, 9], firstIndex % 12);
                 for (let i = 0; i < slip; i++) {
@@ -606,7 +603,7 @@
                   await sleep(60);
                 }
               }
-            } else if ((p2_3 == "🍇" && p3_3 == "🍇") || (p2_2 == "🍇" && p3_1 == "🍇")) {
+            } else if ((result.p2_3 == "🍇" && result.p3_3 == "🍇") || (result.p2_2 == "🍇" && result.p3_1 == "🍇")) {
               if (![2, 4, 6, 10].includes(firstIndex % 12)) {
                 const slip = nextGreater([2, 4, 6, 10], firstIndex % 12);
                 for (let i = 0; i < slip; i++) {
@@ -624,7 +621,7 @@
           }
         } else {
           if (!secondRunning && !thirdRunning) {
-            if ((p2_1 == "7" && p3_1 == "7") || (p2_2 == "7" && p3_3 == "7")) {
+            if ((result.p2_1 == "7" && result.p3_1 == "7") || (result.p2_2 == "7" && result.p3_3 == "7")) {
               if (firstIndex % 12 == 5) {
                 firstIndex += 1;
                 const pos1 = firstReel[(firstIndex % 12) + 1];
@@ -635,7 +632,7 @@
                 display1_3.textContent = pos3;
                 await sleep(60);
               }
-            } else if (p2_2 == "7" && [3, 4].includes(thirdIndex % 12)) {
+            } else if (result.p2_2 == "7" && [3, 4].includes(thirdIndex % 12)) {
               if (firstIndex % 12 == 6) {
                 firstIndex += 1;
                 const pos1 = firstReel[(firstIndex % 12) + 1];
@@ -646,7 +643,7 @@
                 display1_3.textContent = pos3;
                 await sleep(60);
               }
-            } else if ((p2_2 == "7" && p3_1 == "7") || (p2_3 == "7" && p3_3 == "7")) {
+            } else if ((result.p2_2 == "7" && result.p3_1 == "7") || (result.p2_3 == "7" && result.p3_3 == "7")) {
               if (firstIndex % 12 == 7) {
                 firstIndex += 1;
                 const pos1 = firstReel[(firstIndex % 12) + 1];
@@ -662,6 +659,7 @@
         }
       }
       async function secondSlip() {
+        const result = pictureCheck();
         if (light) {
           if (firstRunning && thirdRunning) {
             if (9 <= secondIndex % 12 && secondIndex % 12 <= 11) {
@@ -677,7 +675,7 @@
               }
             }
           } else if (!firstRunning && thirdRunning) {
-            if (p1_1 == "7") {
+            if (result.p1_1 == "7") {
               if (9 <= secondIndex % 12 && secondIndex % 12 <= 11) {
                 for (let i = 0; i < 3; i++) {
                   secondIndex += 1;
@@ -691,7 +689,7 @@
                   if (secondIndex == 1) break;
                 }
               }
-            } else if (p1_2 == "7") {
+            } else if (result.p1_2 == "7") {
               if ([0, 10, 11].includes(secondIndex % 12)) {
                 while ([0, 10, 11].includes(secondIndex % 12)) {
                   secondIndex += 1;
@@ -704,7 +702,7 @@
                   await sleep(60);
                 }
               }
-            }else if (p1_3 == "7") {
+            }else if (result.p1_3 == "7") {
               if ([0, 10, 11].includes(secondIndex % 12)) {
                 for (let i = 0; i < 3; i++) {
                   secondIndex += 1;
@@ -720,7 +718,7 @@
               }
             }
           } else if (firstRunning && !thirdRunning) {
-            if (p3_1 == "7") {
+            if (result.p3_1 == "7") {
               if (9 <= secondIndex % 12 && secondIndex % 12 <= 11) {
                 for (let i = 0; i < 3; i++) {
                   secondIndex += 1;
@@ -734,7 +732,7 @@
                   if (secondIndex == 1) break;
                 }
               }
-            } else if (p3_2 == "7") {
+            } else if (result.p3_2 == "7") {
               if ([0, 10, 11].includes(secondIndex % 12)) {
                 while ([0, 10, 11].includes(secondIndex % 12)) {
                   secondIndex += 1;
@@ -747,7 +745,7 @@
                   await sleep(60);
                 }
               }
-            } else if (p3_3 == "7") {
+            } else if (result.p3_3 == "7") {
               if ([0, 10, 11].includes(secondIndex % 12)) {
                 for (let i = 0; i < 3; i++) {
                   secondIndex += 1;
@@ -763,7 +761,7 @@
               }
             }
           } else if (!firstRunning && !thirdRunning) {
-            if (p1_1 == "7" && p3_1 == "7") {
+            if (result.p1_1 == "7" && result.p3_1 == "7") {
               if ([9, 10, 11].includes(secondIndex % 12)) {
                 while ([9, 10, 11].includes(secondIndex % 12)) {
                   secondIndex += 1;
@@ -776,7 +774,11 @@
                   await sleep(60);
                 }
               }
-            } else if ((p1_1 == "7" && p3_3 == "7") || (p1_2 == "7" && p3_2 == "7") || (p1_3 == "7" && p3_1 == "7")) {
+            } else if (
+              (result.p1_1 == "7" && result.p3_3 == "7") ||
+              (result.p1_2 == "7" && result.p3_2 == "7") ||
+              (result.p1_3 == "7" && result.p3_1 == "7")
+            ) {
               if ([0, 10, 11].includes(secondIndex % 12)) {
                 while ([0, 10, 11].includes(secondIndex % 12)) {
                   secondIndex += 1;
@@ -789,7 +791,7 @@
                   await sleep(60);
                 }
               }
-            } else if (p1_3 == "7" && p3_3 == "7") {
+            } else if (result.p1_3 == "7" && result.p3_3 == "7") {
               if ([0, 1, 11].includes(secondIndex % 12)) {
                 while ([0, 1, 11].includes(secondIndex % 12)) {
                   secondIndex += 1;
@@ -804,7 +806,7 @@
               }
             }
           }
-        } if (BB || LB) {
+        } else if (BB || LB) {
           if (firstRunning && thirdRunning) {
             if (secondIndex % 12 == 4) {
               secondIndex += 1;
@@ -817,7 +819,7 @@
               await sleep(60);
             }
           } else if (!firstRunning && thirdRunning) {
-            if (p1_1 == "🍇") {
+            if (result.p1_1 == "🍇") {
               if (![1, 2, 5, 6, 7, 8, 10, 11].includes(secondIndex % 12)) {
                 const slip = nextGreater([1, 2, 5, 6, 7, 8, 10, 11], secondIndex % 12);
                 for (let i = 0; i < slip; i++) {
@@ -831,7 +833,7 @@
                   await sleep(60);
                 }
               }
-            } else if (p1_2 == "🍇") {
+            } else if (result.p1_2 == "🍇") {
               if (![2, 6, 8, 11].includes(secondIndex % 12)) {
                 const slip = nextGreater([2, 6, 8, 11], secondIndex % 12);
                 for (let i = 0; i < slip; i++) {
@@ -845,7 +847,7 @@
                   await sleep(60);
                 }
               }
-            } else if (p1_3 == "🍇") {
+            } else if (result.p1_3 == "🍇") {
               if (![0, 2, 3, 6, 7, 8, 9, 11].includes(secondIndex % 12)) {
                 const slip = nextGreater([2, 3, 6, 7, 8, 9, 11, 12], secondIndex % 12);
                 for (let i = 0; i < slip; i++) {
@@ -861,7 +863,7 @@
               }
             }
           } else if (firstRunning && !thirdRunning) {
-            if (p3_1 == "🍇") {
+            if (result.p3_1 == "🍇") {
               if (![1, 2, 5, 6, 7, 8, 10, 11].includes(secondIndex % 12)) {
                 const slip = nextGreater([1, 2, 5, 6, 7, 8, 10, 11], secondIndex % 12);
                 for (let i = 0; i < slip; i++) {
@@ -875,7 +877,7 @@
                   await sleep(60);
                 }
               }
-            } else if (p3_2 == "🍇") {
+            } else if (result.p3_2 == "🍇") {
               if (![2, 6, 8, 11].includes(secondIndex % 12)) {
                 const slip = nextGreater([2, 6, 8, 11], secondIndex % 12);
                 for (let i = 0; i < slip; i++) {
@@ -889,7 +891,7 @@
                   await sleep(60);
                 }
               }
-            } else if (p3_3 == "🍇") {
+            } else if (result.p3_3 == "🍇") {
               if (![0, 2, 3, 6, 7, 8, 9, 11].includes(secondIndex % 12)) {
                 const slip = nextGreater([2, 3, 6, 7, 8, 9, 11, 12], secondIndex % 12);
                 for (let i = 0; i < slip; i++) {
@@ -905,7 +907,7 @@
               }
             }
           } else if (!firstRunning && !thirdRunning) {
-            if (p1_1 == "🍇" && p3_1 == "🍇") {
+            if (result.p1_1 == "🍇" && result.p3_1 == "🍇") {
               if (![1, 5, 7, 10].includes(secondIndex % 12)) {
                 const slip = nextGreater([1, 5, 7, 10], secondIndex % 12);
                 for (let i = 0; i < slip; i++) {
@@ -919,7 +921,11 @@
                   await sleep(60);
                 }
               }
-            } else if ((p1_2 == "🍇" && p3_2 == "🍇") || (p1_1 == "🍇" && p3_3 == "🍇") || (p1_3 == "🍇" && p3_1 == "🍇")) {
+            } else if (
+              (result.p1_2 == "🍇" && result.p3_2 == "🍇") ||
+              (result.p1_1 == "🍇" && result.p3_3 == "🍇") ||
+              (result.p1_3 == "🍇" && result.p3_1 == "🍇")
+            ) {
               if (![2, 6, 8, 11].includes(secondIndex % 12)) {
                 const slip = nextGreater([2, 6, 8, 11], secondIndex % 12);
                 for (let i = 0; i < slip; i++) {
@@ -933,7 +939,7 @@
                   await sleep(60);
                 }
               }
-            } else if (p1_3 == "🍇" && p3_3 == "🍇") {
+            } else if (result.p1_3 == "🍇" && result.p3_3 == "🍇") {
               if (![0, 3, 7, 9].includes(secondIndex % 12)) {
                 const slip = nextGreater([3, 7, 9, 12], secondIndex % 12);
                 for (let i = 0; i < slip; i++) {
@@ -951,7 +957,7 @@
           }
         } else {
           if (!firstRunning && !thirdRunning) {
-            if (p1_1 == 7 && p3_1 == "7") {
+            if (result.p1_1 == "7" && result.p3_1 == "7") {
               if (secondIndex % 12 == 0) {
                 secondIndex += 1;
                 const pos1 = secondReel[(secondIndex % 12) + 1];
@@ -963,7 +969,9 @@
                 await sleep(60);
               }
             } else if (
-              (p1_1 == "7" && p3_3 == "7") || (p1_2 == "7" && ["7", "BAR"].includes(p3_2)) || (p1_3 == "7" && p3_1 == "7")
+              (result.p1_1 == "7" && result.p3_3 == "7") ||
+              (result.p1_2 == "7" && ["7", "BAR"].includes(result.p3_2)) ||
+              (result.p1_3 == "7" && result.p3_1 == "7")
             ) {
               if (secondIndex % 12 == 1) {
                 secondIndex += 1;
@@ -975,7 +983,7 @@
                 display2_3.textContent = pos3;
                 await sleep(60);
               }
-            } else if (p1_3 == "7" && p3_3 == "7") {
+            } else if (result.p1_3 == "7" && result.p3_3 == "7") {
               if (secondIndex % 12 == 2) {
                 secondIndex += 1;
                 const pos1 = secondReel[(secondIndex % 12) + 1];
@@ -991,6 +999,7 @@
         }
       }
       async function thirdSlip() {
+        const result = pictureCheck();
         if (light) {
           if (firstRunning && secondRunning) {
             if ([0, 1, 2].includes(thirdIndex % 12)) {
@@ -1006,7 +1015,7 @@
               }
             }
           } else if (!firstRunning && !secondRunning) {
-            if (p1_1 == "7") {
+            if (result.p1_1 == "7") {
               if ([0, 1].includes(thirdIndex % 12)) {
                 while ([0, 1].includes(thirdIndex % 12)) {
                   thirdIndex += 1;
@@ -1030,7 +1039,7 @@
                   await sleep(60);
                 }
               }
-            } else if (p1_2 == "7") {
+            } else if (result.p1_2 == "7") {
               if ([0, 1, 2, 11].includes(thirdIndex % 12)) {
                 for (let i = 0; i < 3; i++) {
                   thirdIndex += 1;
@@ -1044,7 +1053,7 @@
                   if (thirdIndex == 4) break;
                 }
               }
-            } else if (p1_3 == "7") {
+            } else if (result.p1_3 == "7") {
               if ([0, 1].includes(thirdIndex % 12)) {
                 while ([0, 1].includes(thirdIndex % 12)) {
                   thirdIndex += 1;
@@ -1070,7 +1079,7 @@
               }
             }
           } else if (firstRunning && !secondRunning) {
-            if (p2_1 == "7") {
+            if (result.p2_1 == "7") {
               if ([0, 1, 2].includes(thirdIndex % 12)) {
                 while ([0, 1, 2].includes(thirdIndex % 12)) {
                   thirdIndex += 1;
@@ -1083,7 +1092,7 @@
                   await sleep(60);
                 }
               }
-            } else if (p2_2 == "7") {
+            } else if (result.p2_2 == "7") {
               if ([0, 1, 2].includes(thirdIndex % 12)) {
                 for (let i = 0; i < 3; i++) {
                   thirdIndex += 1;
@@ -1096,7 +1105,7 @@
                   await sleep(60);
                 }
               }
-            } else if (p2_3 == "7") {
+            } else if (result.p2_3 == "7") {
               if ([2, 3, 4].includes(thirdIndex % 12)) {
                 while ([2, 3, 4].includes(thirdIndex % 12)) {
                   thirdIndex += 1;
@@ -1111,7 +1120,7 @@
               }
             }
           } else if (!firstRunning && !secondRunning) {
-            if ((p1_1 == "7" && p2_1 == "7") || (p1_3 == "7" && p2_2 == "7")) {
+            if ((result.p1_1 == "7" && result.p2_1 == "7") || (result.p1_3 == "7" && result.p2_2 == "7")) {
               if ([0, 1, 2].includes(thirdIndex % 12)) {
                 for (let i = 0; i < 3; i++) {
                   thirdIndex += 1;
@@ -1124,7 +1133,7 @@
                   await sleep(60);
                 }
               }
-            } else if (p1_2 == "7" && p2_2 == "7") {
+            } else if (result.p1_2 == "7" && result.p2_2 == "7") {
               if ([0, 1, 2, 11].includes(thirdIndex % 12)) {
                 for (let i = 0; i < 3; i++) {
                   thirdIndex += 1;
@@ -1138,7 +1147,7 @@
                   if (thirdIndex == 4) break;
                 }
               }
-            } else if ((p1_1 == "7" && p2_2 == "7") || (p1_3 == "7" && p2_3 == "7")) {
+            } else if ((result.p1_1 == "7" && result.p2_2 == "7") || (result.p1_3 == "7" && result.p2_3 == "7")) {
               if ([2, 3, 4].includes(thirdIndex % 12)) {
                 while ([2, 3, 4].includes(thirdIndex % 12)) {
                   thirdIndex += 1;
@@ -1166,7 +1175,7 @@
               await sleep(60);
             }
           } else if (!firstRunning && secondRunning) {
-            if (p1_1 == "🍇") {
+            if (result.p1_1 == "🍇") {
               if (![0, 1, 3, 5, 7, 8, 10, 11].includes(thirdIndex % 12)) {
                 const slip = nextGreater([0, 1, 3, 5, 7, 8, 10, 11], thirdIndex % 12);
                 for (let i = 0; i < slip; i++) {
@@ -1180,7 +1189,7 @@
                   await sleep(60);
                 }
               }
-            } else if (p1_2 == "🍇") {
+            } else if (result.p1_2 == "🍇") {
               if (![2, 6, 8, 11].includes(thirdIndex % 12)) {
                 const slip = nextGreater([2, 6, 8, 11], thirdIndex % 12);
                 for (let i = 0; i < slip; i++) {
@@ -1194,7 +1203,7 @@
                   await sleep(60);
                 }
               }
-            } else if (p1_3 == "🍇") {
+            } else if (result.p1_3 == "🍇") {
               if (![0, 1, 3, 5, 7, 8, 10, 11].includes(thirdIndex % 12)) {
                 const slip = nextGreater([0, 1, 3, 5, 7, 8, 10, 11], thirdIndex % 12);
                 for (let i = 0; i < slip; i++) {
@@ -1210,7 +1219,7 @@
               }
             }
           } else if (firstRunning && !secondRunning) {
-            if (p2_1 == "🍇") {
+            if (result.p2_1 == "🍇") {
               if (![1, 5, 8, 11].includes(thirdIndex % 12)) {
                 const slip = nextGreater([1, 5, 8, 11], thirdIndex % 12);
                 for (let i = 0; i < slip; i++) {
@@ -1224,7 +1233,7 @@
                   await sleep(60);
                 }
               }
-            } else if (p2_2 == "🍇") {
+            } else if (result.p2_2 == "🍇") {
               if (thirdIndex % 12 == 4) {
                 thirdIndex += 1;
                 const pos1 = thirdReel[(thirdIndex % 12) + 1];
@@ -1235,7 +1244,7 @@
                 display3_3.textContent = pos3;
                 await sleep(60);
               }
-            } else if (p2_3 == "🍇") {
+            } else if (result.p2_3 == "🍇") {
               if (![1, 3, 7, 10].includes(thirdIndex % 12)) {
                 const slip = nextGreater([1, 3, 7, 10], thirdIndex % 12);
                 for (let i = 0; i < slip; i++) {
@@ -1251,7 +1260,7 @@
               }
             }
           } else if (!firstRunning && !secondRunning) {
-            if ((p1_1 == "🍇" && p2_1 == "🍇") || (p1_3 == "🍇" && p2_2 == "🍇")) {
+            if ((result.p1_1 == "🍇" && result.p2_1 == "🍇") || (result.p1_3 == "🍇" && result.p2_2 == "🍇")) {
               if (![1, 5, 8, 11].includes(thirdIndex % 12)) {
                 const slip = nextGreater([1, 5, 8, 11], thirdIndex % 12);
                 for (let i = 0; i < slip; i++) {
@@ -1265,7 +1274,7 @@
                   await sleep(60);
                 }
               }
-            } else if (p1_2 == "🍇" && p2_2 == "🍇") {
+            } else if (result.p1_2 == "🍇" && result.p2_2 == "🍇") {
               if (![0, 2, 6, 9].includes(thirdIndex % 12)) {
                 const slip = nextGreater([2, 6, 9, 12], thirdIndex % 12);
                 for (let i = 0; i < slip; i++) {
@@ -1279,7 +1288,7 @@
                   await sleep(60);
                 }
               }
-            } else if ((p1_3 == "🍇" && p2_3 == "🍇") || (p1_1 == "🍇" && p2_2 == "🍇")) {
+            } else if ((result.p1_3 == "🍇" && result.p2_3 == "🍇") || (result.p1_1 == "🍇" && result.p2_2 == "🍇")) {
               if (![1, 3, 7, 10].includes(thirdIndex % 12)) {
                 const slip = nextGreater([1, 3, 7, 10], thirdIndex % 12);
                 for (let i = 0; i < slip; i++) {
@@ -1297,8 +1306,8 @@
           }
         } else if (!light && !BB && !LB) {
           if (!firstRunning && !secondRunning) {
-            if ((p1_1 == "7" && p2_1 == "7") || (p1_3 == "7" && p2_2 == "7")) {
-              if (p3_1 == "7") {
+            if ((result.p1_1 == "7" && result.p2_1 == "7") || (result.p1_3 == "7" && result.p2_2 == "7")) {
+              if (result.p3_1 == "7") {
                 thirdIndex += 1;
                 const pos1 = thirdReel[(thirdIndex % 12) + 1];
                 const pos2 = thirdReel[((thirdIndex - 1) % 12) + 1];
@@ -1308,8 +1317,8 @@
                 display3_3.textContent = pos3;
                 await sleep(60);
               }
-            } else if (p1_2 == "7" && p2_2 == "7") {
-              if (["BAR", "7"].includes(p3_2)) {
+            } else if (result.p1_2 == "7" && result.p2_2 == "7") {
+              if (["BAR", "7"].includes(result.p3_2)) {
                 for (let i = 0; i < 2; i++) {
                   thirdIndex += 1;
                   const pos1 = thirdReel[(thirdIndex % 12) + 1];
@@ -1321,8 +1330,8 @@
                   await sleep(60);
                 }
               }
-            } else if ((p1_3 == "7" && p2_3 == "7") || (p1_1 == "7" && p2_2 == "7")) {
-              if (p3_3 == "7") {
+            } else if ((result.p1_3 == "7" && result.p2_3 == "7") || (result.p1_1 == "7" && result.p2_2 == "7")) {
+              if (result.p3_3 == "7") {
                 thirdIndex += 1;
                 const pos1 = thirdReel[(thirdIndex % 12) + 1];
                 const pos2 = thirdReel[((thirdIndex - 1) % 12) + 1];
