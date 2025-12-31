@@ -670,7 +670,7 @@
               const slip = 3;
               whether = true;
             }
-          } else if (!firstRunning && !secondRunning) {
+          } else if (!firstRunning && secondRunning) {
             if (result.p1_1 == "7") {
               if ([0, 11].includes(thirdIndex % 12)) {
                 const slip = 14 - (thirdIndex % 12);
@@ -679,8 +679,21 @@
                 const slip = 4 - (thirdIndex % 12);
                 whether = true;
               }
-            }//ここから
-          }
+            } else if (result.p1_2 == "7") {
+              if ([0, 1, 2].includes(thirdIndex % 12)) {
+                const slip = 3 - (thirdIndex % 12);
+                whether = true;
+              }
+            } else if (result.p1_3 == "7") {
+              if ([0, 11].includes(thirdIndex % 12)) {
+                const slip = 14 - (thirdIndex % 12);
+                whether = true;
+              } else if ([1, 3].includes(thirdIndex % 12)) {
+                const slip = 4 - (thirdIndex % 12);
+                whether = true;
+              }
+            }
+          } else if (firstRunning)
         }
       }
       document.getElementById("firstStop").onclick = () => {
