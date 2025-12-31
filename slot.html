@@ -570,15 +570,72 @@
               whether = true;
             }
           } else if (!firstRunning && thirdRunning) {
-            if (p1_1 == "🍇") {
+            if (result.p1_1 == "🍇") {
               if (![0, 1, 4, 5, 6, 7, 9, 10].includes(secondIndex % 12)) {
                 const slip = slipNumber([0, 1, 4, 5, 6, 7, 9, 10], secondIndex % 12);
                 whether = true;
               }
-            } else if (p2_2 == "🍇") {
-              if (![1, 5, 7, 10].includes(secondIndex % 12)) {
-                const slip 
+            } else if (result.p2_2 == "🍇") {
+              if (secondIndex % 12 == 3) {
+                const slip = slipNumber([1, 5, 7, 10], secondIndex % 12);
+                whether = true;
               }
+            } else if (result.p2_3 == "🍇") {
+              if (![2, 6, 8, 11].includes(secondIndex % 12)) {
+                const slip = slipNumber([2, 6, 8, 11], secondIndex % 12);
+                whether = true;
+              }
+            }
+          } else if (firstRunning && !thirdRunning) {
+            if (result.p3_1 == "🍇") {
+              if (![0, 1, 4, 5, 6, 7, 9, 10].includes(secondIndex % 12)) {
+                const slip = slipNumber([0, 1, 4, 5, 6, 7, 9, 10], secondIndex % 12);
+                whether = true;
+              }
+            } else if (result.p3_2 == "🍇") {
+              if (![1, 5, 7, 9].includes(secondIndex % 12)) {
+                const slip = slipNumber([1, 5, 7, 9], secondIndex % 12);
+                whether = true;
+              }
+            } else if (result.p3_3 == "🍇") {
+              if (![1, 2, 5, 6, 7, 8, 10, 11].includes(secondIndex % 12)) {
+                const slip = slipNumber([1, 2, 5, 6, 7, 8, 10, 11], secondIndex % 12);
+                whether = true;
+              }
+            }
+          } else if (!firstRunning && !thirdRunning) {
+            if (result.p1_1 == "🍇" && result.p3_1 == "🍇") {
+              if (![0, 4, 6, 10].includes(secondIndex % 12)) {
+                const slip = slipNumber([0, 4, 6, 10], secondIndex % 12);
+                whether = true;
+              }
+            } else if (
+              (result.p1_2 == "🍇" && result.p3_2 == "🍇") || (result.p1_1 == "🍇" && result.p3_3 == "🍇") ||
+              (result.p1_3 == "🍇" && result.p3_1 == "🍇")
+            ) {
+              if (![1, 5, 7, 10].includes(secondIndex % 12)) {
+                const slip = slipNumber([1, 5, 7, 10], secondIndex % 12);
+                whether = true;
+              }
+            } else if (result.p1_3 == "🍇" && result.p3_3 == "🍇") {
+              if ([2, 6, 8, 11].includes(secondIndex % 12)) {
+                const slip = slipNumber([2, 6, 8, 11], secondIndex % 12);
+                whether = true;
+              }
+            }
+          }
+        } else if (!light && !BB && !LB) {
+          if (!firstRunning && !thirdRunning) {
+            if (result.p1_1 == "7" && result.p3_1 == "7") {
+              if (secondIndex % 12 == 11) {
+                const slip = 1;
+                whether = true;
+              }
+            } else if (
+              (result.p1_2 == "7" && ["7", "BAR"].includes(result.p3_2)) || (result.p1_1 == "7" && result.p3_3 == "7") ||
+              (result.p1_3 == "7" && result.p3_1 == "7")
+            ) {
+              //ここ
             }
           }
         }
