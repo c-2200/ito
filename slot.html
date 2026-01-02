@@ -581,7 +581,7 @@
                 whether = true;
               }
             } else if (result.p1_2 == "🍇") {
-              if (secondIndex % 12 == 3) {
+              if (![1, 5, 7, 10].includes(secondIndex % 12)) {
                 slip = slipNumber([1, 5, 7, 10], secondIndex % 12);
                 whether = true;
               }
