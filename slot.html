@@ -167,6 +167,7 @@
       let light = true;
       let BB = false;
       let LB = false;
+      let bet = false;
       const display1_1 = document.getElementById("display1_1");
       const display2_1 = document.getElementById("display2_1");
       const display3_1 = document.getElementById("display3_1");
@@ -223,6 +224,8 @@
               } else if (hand[i] == "🤡") {
                 creditN += 8;
                 payoutN += 15;
+              } else if (hand[i] == "🦏") {
+                bet = true;
               } else if (hand[i] == "7") {
                 BB = true;
                 BBN.textContent = Number(BBN.textContent) + 1;
@@ -252,13 +255,13 @@
             for (let i = 0; i < hand.length; i++) {
               if (hand[i] == "🍇") {
                 creditN += 7;
-                payoutN += 15;
-                countN += 15;
+                payoutN += 14;
+                countN += 28;
               } else {
                 return;
               }
             }
-            if (countN == 90) {
+            if (countN == 280) {
               BB = false;
               countN = 0;
               payoutN = 0;
@@ -855,8 +858,13 @@
         thirdSlip();
         onAllStop();
       };
+      document.getElementById("betButton").onclick = () => {
+        if (bet) return;
+        const creditN = Number(document.getElementById("credit").textContent);
+        document.getElementById("credit").textContent = creditN - 3;
+      }
       document.getElementById("spinButton").onclick = () => {
-        if (firstRunning == false && secondRunning == false &&thirdRunning == false) {
+        if (!firstRunning && !secondRunning && !thirdRunning && bet) {
           startFirstReel();
           startSecondReel();
           startThirdReel();
@@ -864,7 +872,7 @@
       };
       document.addEventListener("keydown", (e) => {
         if (e.key == "Enter") {
-          if (firstRunning == false && secondRunning == false &&thirdRunning == false) {
+          if (!firstRunning && !secondRunning && !thirdRunning && bet) {
             startFirstReel();
             startSecondReel();
             startThirdReel();
@@ -890,6 +898,10 @@
           thirdInterval = null;
           thirdSlip();
           onAllStop();
+        } else if (e.key == "b") {
+          if (bet) return;
+          const creditN = Number(document.getElementById("credit").textContent);
+          document.getElementById("credit").textContent = creditN - 3;
         }
       });
     </script>
