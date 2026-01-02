@@ -680,7 +680,7 @@
           } else if (!firstRunning && secondRunning) {
             if (result.p1_1 == "7") {
               if ([0, 11].includes(thirdIndex % 12)) {
-                slip = 14 - (thirdIndex % 12);
+                slip = (14 - (thirdIndex % 12)) % 12;
                 whether = true;
               } else if ([1, 3].includes(thirdIndex % 12)) {
                 slip = 4 - (thirdIndex % 12);
@@ -693,7 +693,7 @@
               }
             } else if (result.p1_3 == "7") {
               if ([0, 11].includes(thirdIndex % 12)) {
-                slip = 14 - (thirdIndex % 12);
+                slip = (14 - (thirdIndex % 12)) % 12;
                 whether = true;
               } else if ([1, 3].includes(thirdIndex % 12)) {
                 slip = 4 - (thirdIndex % 12);
@@ -798,7 +798,7 @@
           }
         } else if (!light && !BB && !LB) {
           if (!firstRunning && !secondRunning) {
-            if ((result.p1_1 == "7" && result.p2_2 == "7") || (result.p1_3 == "7" && result.p2_2 == "7")) {
+            if ((result.p1_1 == "7" && result.p2_1 == "7") || (result.p1_3 == "7" && result.p2_2 == "7")) {
               if (thirdIndex % 12 == 2) {
                 slip = 1;
                 whether = true;
