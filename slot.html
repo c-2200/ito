@@ -333,6 +333,9 @@
           if (NG.has((index + i) % 12)) return i;
         }
       }
+      function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
       async function firstSlip() {
         let slip = 0;
         let whether = false;
