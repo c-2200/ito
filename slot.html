@@ -254,6 +254,7 @@
         let creditN = Number(credit.textContent);
         let payoutN = Number(payout.textContent);
         let countN = Number(count.textContent);
+        let medalN = Number(document.getElementById("medal").textContent);
         if (!BB && !LB) {
           spinN.textContent = Number(spinN.textContent) + 1;
           if (hand.length > 0) {
@@ -333,6 +334,8 @@
               BB = false;
               countN = 0;
               payoutN = 0;
+              medalN += 280;
+              document.getElementById("medal").textContet = medalN;
             }
           }
           credit.textContent = creditN;
@@ -355,6 +358,7 @@
               LB = false;
               countN = 0;
               payoutN = 0;
+              document.getElementById("medal").textContet = medalN;
             }
           }
           credit.textContent = creditN;
