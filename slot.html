@@ -924,9 +924,9 @@
         if (bet || Number(document.getElementById("credit").textContent) <= 0) return;
         const creditN = Number(document.getElementById("credit").textContent);
         if (creditN < 3) {
-          document.getElementById("credit").textContent = creditN - 3;
-        } else {
           document.getElementById("credit").textContent = 0;
+        } else {
+          document.getElementById("credit").textContent = creditN - 3;
         }
         bet = true;
       }
@@ -981,9 +981,9 @@
           if (bet || Number(document.getElementById("credit").textContent) <= 0) return;
           const creditN = Number(document.getElementById("credit").textContent);
           if (creditN < 3) {
-            document.getElementById("credit").textContent = creditN - 3;
-          } else {
             document.getElementById("credit").textContent = 0;
+          } else {
+            document.getElementById("credit").textContent = creditN - 3;
           }
           bet = true;
         }
