@@ -96,6 +96,29 @@
         align-items: center;
         justify-content: center;
       }
+      .info {
+        border: 1px solid black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .medal {
+        display: grid;
+        grid-template-columns: 100px 100px;
+        grid-template-rows: 40px 40px;
+        font-size: 20px;
+      }
+      .playButton {
+        width: 100px;
+        height: 35px;
+        background-color: yellow;
+        color: black;
+        font-size: 22px;
+        font-weight: bold;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+      }
       .Rump {
         display: flex;
         border: none;
@@ -149,6 +172,15 @@
           <div id="count">0</div>
           <div id="payout">0</div>
         </div>
+      </div>
+      <div class="info">
+        <div class="medal">
+          <div>メダル</div>
+          <div>所持金</div>
+          <div id="medal">0</div>
+          <div id="money">1000</div>
+        </div>
+        <button class="playButton"></button>
       </div>
     </div>
     <script>
@@ -879,9 +911,14 @@
         onAllStop();
       };
       document.getElementById("betButton").onclick = () => {
-        if (bet) return;
+        if (bet || Number(document.getElementById("credit").textContent) <= 0) return;
         const creditN = Number(document.getElementById("credit").textContent);
-        document.getElementById("credit").textContent = creditN - 3;
+        if (creditN < 3) {
+          document.getElementById("credit").textContent = creditN - 3;
+        } else {
+          document.getElementById("credit").textContent = 0;
+        }
+        bet = true;
       }
       document.getElementById("spinButton").onclick = () => {
         if (!firstRunning && !secondRunning && !thirdRunning && bet) {
@@ -890,6 +927,18 @@
           startThirdReel();
         }
       };
+      document.getElementById("playButton").onclick = () => {
+        creditN = Number(document.getElementById("credit").textContent);
+        moneyN = Number(document.getElementById("money").textContent);
+        if (creditN == 0) {
+          if (moneyN > 0) {
+            moneyN -= 100;
+            creditN = 50;
+            document.getElementById("credit").textContent = creditN;
+            document.getElementById("money").textContent = moneyN;
+          }
+        }
+      }
       document.addEventListener("keydown", (e) => {
         if (e.key == "Enter") {
           if (!firstRunning && !secondRunning && !thirdRunning && bet) {
@@ -919,9 +968,14 @@
           thirdSlip();
           onAllStop();
         } else if (e.key == "b") {
-          if (bet) return;
+          if (bet || Number(document.getElementById("credit").textContent) <= 0) return;
           const creditN = Number(document.getElementById("credit").textContent);
-          document.getElementById("credit").textContent = creditN - 3;
+          if (creditN < 3) {
+            document.getElementById("credit").textContent = creditN - 3;
+          } else {
+            document.getElementById("credit").textContent = 0;
+          }
+          bet = true;
         }
       });
     </script>
