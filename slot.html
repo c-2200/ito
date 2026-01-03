@@ -935,7 +935,8 @@
       };
       document.getElementById("betButton").onclick = () => {
         if (bet || Number(document.getElementById("credit").textContent) <= 0) return;
-        const creditN = Number(document.getElementById("credit").textContent);
+        let creditN = Number(document.getElementById("credit").textContent);
+        let payoutN = Number(payout.textContent);
         if (creditN < 3) {
           document.getElementById("credit").textContent = 0;
         } else {
@@ -954,8 +955,8 @@
         }
       };
       document.getElementById("playButton").onclick = () => {
-        const creditN = Number(document.getElementById("credit").textContent);
-        const moneyN = Number(document.getElementById("money").textContent);
+        let creditN = Number(document.getElementById("credit").textContent);
+        let moneyN = Number(document.getElementById("money").textContent);
         if (creditN == 0) {
           if (moneyN > 0) {
             moneyN -= 100;
@@ -995,8 +996,8 @@
           onAllStop();
         } else if (e.key == "b") {
           if (bet || Number(document.getElementById("credit").textContent) <= 0) return;
-          const creditN = Number(document.getElementById("credit").textContent);
-          const payoutN = Number(document.getElementById("payout").textContent);
+          let creditN = Number(document.getElementById("credit").textContent);
+          let payoutN = Number(document.getElementById("payout").textContent);
           if (creditN < 3) {
             document.getElementById("credit").textContent = 0;
           } else {
@@ -1007,8 +1008,8 @@
           }
           bet = true;
         } else if (e.key == "p") {
-          const creditN = Number(document.getElementById("credit").textContent);
-          const moneyN = Number(document.getElementById("money").textContent);
+          let creditN = Number(document.getElementById("credit").textContent);
+          let moneyN = Number(document.getElementById("money").textContent);
           if (creditN == 0) {
             if (moneyN > 0) {
               moneyN -= 100;
