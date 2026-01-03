@@ -164,7 +164,7 @@
       let firstInterval = null;
       let secondInterval = null;
       let thirdInterval = null;
-      let light = true;
+      let light = false;
       let BB = false;
       let LB = false;
       let bet = false;
@@ -216,13 +216,25 @@
           if (hand.length > 0) {
             for (let i = 0; i < hand.length; i++) {
               if (hand[i] == "🍇") {
-                creditN += 4;
+                if (creditN < 46) {
+                  creditN += 4;
+                } else {
+                  creditN = 50;
+                }
                 payoutN += 7;
               } else if (hand[i] == "🔔") {
-                creditN += 6;
+                if (creditN < 44) {
+                  creditN += 6;
+                } else {
+                  creditN = 50;
+                }
                 payoutN += 11;
               } else if (hand[i] == "🤡") {
-                creditN += 8;
+                if (creditN < 42) {
+                  creditN += 8;
+                } else {
+                  creditN = 50;
+                }
                 payoutN += 15;
               } else if (hand[i] == "🦏") {
                 bet = true;
@@ -254,7 +266,11 @@
           if (hand.length > 0) {
             for (let i = 0; i < hand.length; i++) {
               if (hand[i] == "🍇") {
-                creditN += 7;
+                if (creditN < 43) {
+                  creditN += 7;
+                } else {
+                  creditN = 50;
+                }
                 payoutN += 14;
                 countN += 28;
               } else {
@@ -274,12 +290,16 @@
           if (hand.length > 0) {
             for (let i = 0; i < hand.length; i++) {
               if (hand[i] == "🍇") {
-                creditN += 5;
-                payoutN += 10;
-                countN += 10;
+                if (creditN < 43) {
+                  creditN += 7;
+                } else {
+                  creditN = 50;
+                }
+                payoutN += 14;
+                countN += 28;
               }
             }
-            if (countN == 60) {
+            if (countN == 140) {
               LB = false;
               countN = 0;
               payoutN = 0;
