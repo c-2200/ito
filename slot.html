@@ -928,6 +928,9 @@
         } else {
           document.getElementById("credit").textContent = creditN - 3;
         }
+        if (payoutN > 0) {
+          document.getElementById("payout").textContent = 0;
+        }
         bet = true;
       }
       document.getElementById("spinButton").onclick = () => {
@@ -938,8 +941,8 @@
         }
       };
       document.getElementById("playButton").onclick = () => {
-        creditN = Number(document.getElementById("credit").textContent);
-        moneyN = Number(document.getElementById("money").textContent);
+        const creditN = Number(document.getElementById("credit").textContent);
+        const moneyN = Number(document.getElementById("money").textContent);
         if (creditN == 0) {
           if (moneyN > 0) {
             moneyN -= 100;
@@ -980,12 +983,27 @@
         } else if (e.key == "b") {
           if (bet || Number(document.getElementById("credit").textContent) <= 0) return;
           const creditN = Number(document.getElementById("credit").textContent);
+          const payoutN = Number(document.getElementById("payout").textContent);
           if (creditN < 3) {
             document.getElementById("credit").textContent = 0;
           } else {
             document.getElementById("credit").textContent = creditN - 3;
           }
+          if (payoutN > 0) {
+            document.getElementById("payout").textContent = 0;
+          }
           bet = true;
+        } else if (e.key == "p") {
+          const creditN = Number(document.getElementById("credit").textContent);
+          const moneyN = Number(document.getElementById("money").textContent);
+          if (creditN == 0) {
+            if (moneyN > 0) {
+              moneyN -= 100;
+              creditN = 50;
+              document.getElementById("credit").textContent = creditN;
+              document.getElementById("money").textContent = moneyN;
+            }
+          }
         }
       });
     </script>
