@@ -284,7 +284,7 @@
                 bet = true;
               } else if (hand[i] == "chance") {
                 const lightChance = Math.floor(Math.random() * 298);
-                if (0 <= lightChance <= 12) {
+                if (0 <= lightChance && lightChance <= 12) {
                   light = true;
                   document.getElementById("Rump").classList.remove("Rump");
                   document.getElementById("Rump").classList.add("litRump");
@@ -326,8 +326,6 @@
                 }
                 payoutN += 14;
                 countN += 28;
-              } else {
-                return;
               }
             }
             if (countN == 280) {
@@ -335,7 +333,7 @@
               countN = 0;
               payoutN = 0;
               medalN += 280;
-              document.getElementById("medal").textContet = medalN;
+              document.getElementById("medal").textContent = medalN;
             }
           }
           credit.textContent = creditN;
@@ -358,7 +356,8 @@
               LB = false;
               countN = 0;
               payoutN = 0;
-              document.getElementById("medal").textContet = medalN;
+              medalN += 140;
+              document.getElementById("medal").textContent = medalN;
             }
           }
           credit.textContent = creditN;
