@@ -367,7 +367,6 @@
       }
       function startFirstReel() {
         if (firstRunning) return;
-        firstRunning = true;
         firstInterval = setInterval(() => {
           firstIndex++;
           const pos1 = firstReel[(firstIndex + 1) % 12];
@@ -377,10 +376,12 @@
           display1_2.textContent = pos2;
           display1_3.textContent = pos3;
         }, 60);
+        setTimeout(() => {
+          firstRunning = true;
+        }, 1000);
       }
       function startSecondReel() {
         if (secondRunning) return;
-        secondRunning = true;
         secondInterval = setInterval(() => {
           secondIndex ++;
           const pos1 = secondReel[(secondIndex + 1) % 12];
@@ -390,10 +391,12 @@
           display2_2.textContent = pos2;
           display2_3.textContent = pos3;
         }, 60);
+        setTimeout(() => {
+          secondRunning = true;
+        }, 1000);
       }
       function startThirdReel() {
         if (thirdRunning) return;
-        thirdRunning = true;
         thirdInterval = setInterval(() => {
           thirdIndex++;
           const pos1 = thirdReel[(thirdIndex + 1) % 12];
@@ -403,6 +406,9 @@
           display3_2.textContent = pos2;
           display3_3.textContent = pos3;
         }, 60);
+        setTimeout(() => {
+          thirdRunning = true;
+        }, 1000);
       }
       //すべらせる
       function slipNumber(set, index) {
