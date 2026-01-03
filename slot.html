@@ -244,6 +244,7 @@
         if (result.p1_1 == result.p2_2 && result.p2_2 == result.p3_3) hand.push(result.p1_1);
         if (result.p1_3 == result.p2_2 && result.p2_2 == result.p3_1) hand.push(result.p1_3);
         if (result.p1_2 == result.p2_2 && result.p2_2 == "7" && result.p3_2 == "BAR") hand.push("L");
+        if (result.p1_3 == "🍒") hand.push("chance");
         return hand;
       }
       function onAllStop() {
@@ -280,6 +281,13 @@
                 payoutN += 15;
               } else if (hand[i] == "🦏") {
                 bet = true;
+              } else if (hand[i] == "chance") {
+                const lightChance = Math.floor(Math.random() * 20);
+                if (lightChance == 0) {
+                  light = true;
+                  document.getElementById("Rump").classList.remove("Rump");
+                  document.getElementById("Rump").classList.add("litRump");
+                }
               } else if (hand[i] == "7") {
                 BB = true;
                 BBN.textContent = Number(BBN.textContent) + 1;
@@ -298,11 +306,13 @@
           }
           credit.textContent = creditN;
           payout.textContent = payoutN;
-          const lightChance = Math.floor(Math.random() * 150);
-          if (lightChance == 0) {
-            light = true;
-            document.getElementById("Rump").classList.remove("Rump");
-            document.getElementById("Rump").classList.add("litRump");
+          if (!light) {
+            const lightChance = Math.floor(Math.random() * 150);
+            if (lightChance == 0) {
+              light = true;
+              document.getElementById("Rump").classList.remove("Rump");
+              document.getElementById("Rump").classList.add("litRump");
+            }
           }
         } else if (BB) {
           if (hand.length > 0) {
