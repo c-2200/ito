@@ -183,6 +183,7 @@
         </div>
       </div>
       <div class="info">
+        <p>SPINをおしてから1秒間はSTOPできません</p>
         <div class="medal">
           <div>メダル</div>
           <div>所持金</div>
@@ -366,7 +367,7 @@
         }
       }
       function startFirstReel() {
-        if (firstRunning) return;
+        if (firstRunning || firstInterval) return;
         firstInterval = setInterval(() => {
           firstIndex++;
           const pos1 = firstReel[(firstIndex + 1) % 12];
@@ -381,7 +382,7 @@
         }, 1000);
       }
       function startSecondReel() {
-        if (secondRunning) return;
+        if (secondRunning || secondInterval) return;
         secondInterval = setInterval(() => {
           secondIndex ++;
           const pos1 = secondReel[(secondIndex + 1) % 12];
@@ -396,7 +397,7 @@
         }, 1000);
       }
       function startThirdReel() {
-        if (thirdRunning) return;
+        if (thirdRunning || thirdInterval) return;
         thirdInterval = setInterval(() => {
           thirdIndex++;
           const pos1 = thirdReel[(thirdIndex + 1) % 12];
