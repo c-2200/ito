@@ -282,8 +282,8 @@
               } else if (hand[i] == "🦏") {
                 bet = true;
               } else if (hand[i] == "chance") {
-                const lightChance = Math.floor(Math.random() * 20);
-                if (lightChance == 0) {
+                const lightChance = Math.floor(Math.random() * 298);
+                if (0 <= lightChance <= 12) {
                   light = true;
                   document.getElementById("Rump").classList.remove("Rump");
                   document.getElementById("Rump").classList.add("litRump");
