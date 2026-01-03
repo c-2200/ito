@@ -248,6 +248,7 @@
       }
       function onAllStop() {
         if (firstRunning || secondRunning || thirdRunning) return;
+        bet = false;
         const hand = handCheck();
         let creditN = Number(credit.textContent);
         let payoutN = Number(payout.textContent);
